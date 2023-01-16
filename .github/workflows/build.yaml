@@ -13,10 +13,17 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.13
         with:
           cmake-version: '3.16.x'
+
       - name: Build src
-        run: cmake 
+        run: |
+            cmake .
+            make
+
       - name: Build website
-        run: ./app ./site -o ./build
+        run: |
+            mkdir ./build
+            ./static_builder ./site -o build
+
       - name: Commit built website
         uses: EndBug/add-and-commit@v9
         with:
