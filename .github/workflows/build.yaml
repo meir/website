@@ -1,0 +1,25 @@
+
+name: build-site
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: '3.16.x'
+      - name: Build src
+        run: cmake 
+      - name: Build website
+        run: ./app ./site -o ./build
+      - name: Commit built website
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'build'
+          message: 'Build website'
+          push: true
