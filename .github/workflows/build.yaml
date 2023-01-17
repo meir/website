@@ -16,13 +16,6 @@ jobs:
       - name: Build src
         run: go run ./app/main.go -i ./site -o ./build
 
-      - name: Commit built website
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: 'build'
-          message: 'Build website'
-          push: true
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
