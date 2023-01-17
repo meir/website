@@ -9,20 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1.13
+      - uses: actions/setup-go@v3
         with:
-          cmake-version: '3.16.x'
+          go-version: '^1.19.2'
 
       - name: Build src
-        run: |
-            cmake .
-            make
-
-      - name: Build website
-        run: |
-            mkdir ./build
-            ./static_builder ./site -o build
+        run: go run ./app/main.go -i ./site -o ./build
 
       - name: Commit built website
         uses: EndBug/add-and-commit@v9
@@ -30,3 +22,9 @@ jobs:
           add: 'build'
           message: 'Build website'
           push: true
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
