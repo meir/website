@@ -19,6 +19,7 @@ jobs:
 
       - name: Build src
         run: go run ./app/main.go -i ./site -o ./build
+      - run: echo "yesimhuman.dev" > ./build/CNAME
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
