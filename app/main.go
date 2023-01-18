@@ -8,19 +8,21 @@ import (
 	"path"
 	"strings"
 
-	"github.com/flamingo-development/static/internal/lexer"
+	"github.com/flamingo-development/static/internal/lexern"
 )
 
 var folder = flag.String("i", "./site", "Folder to build from")
 var output = flag.String("o", "./build", "Folder to build to")
+var debug = flag.Bool("d", false, "Debug mode")
 
 func main() {
 	flag.Parse()
 
-	lexer.SetRoot(*folder)
+	lexer := lexern.NewLexer(*folder)
+	lexer.Debug = *debug
 	os.MkdirAll(path.Join(*output, "/assets"), 0755)
 
-	pages, err := load_dir(*folder)
+	pages, err := load_dir(*folder, lexer)
 	if err != nil {
 		panic(err)
 	}
@@ -42,17 +44,17 @@ func main() {
 
 }
 
-func load_dir(f string) (map[string]*lexer.Page, error) {
+func load_dir(f string, lexer *lexern.Lexer) (map[string]*lexern.Page, error) {
 	dir, err := os.ReadDir(f)
 	if err != nil {
 		panic(err)
 	}
 
-	pages := make(map[string]*lexer.Page)
+	pages := make(map[string]*lexern.Page)
 
 	for _, file := range dir {
 		if file.IsDir() {
-			subpages, err := load_dir(path.Join(f, file.Name()))
+			subpages, err := load_dir(path.Join(f, file.Name()), lexer)
 			if err != nil {
 				panic(err)
 			}
@@ -74,6 +76,10 @@ func load_dir(f string) (map[string]*lexer.Page, error) {
 		page, err := lexer.ProcessFile(f, file.Name())
 		if err != nil {
 			panic(err)
+		}
+
+		if lexer.Debug {
+			fmt.Printf("=== %s\n%s\n---\n", page.Meta["url"], page.Content)
 		}
 
 		if page.Meta["url"] != "" {
