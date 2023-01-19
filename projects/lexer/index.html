@@ -1,12 +1,13 @@
 
 
+
 <!DOCTYPE html>
 <html lang=en>
 <head>
     <meta charset=UTF-8>
     <meta http-equiv=X-UA-Compatible content=IE=edge>
     <meta name=viewport content=width=device-width, initial-scale=1.0>
-    <title>Document</title>
+    <title>Lexer</title>
     <link rel=stylesheet href=/assets/main.css>
     <link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css>
     <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
@@ -39,20 +40,24 @@
         it generates the html files from a different file structure with a small custom markup language.
         the markup language is very simple and is used to include other files and to add some basic things such as metadata and content slots.
     </p>
-    <pre>
-        <code class=language-html>
-            
+    
+<pre>
+    <code class="language-html">
+        
+        
+        
             +url = /;
-
+            +.title = Home;
             {$/components/template.htm:
                 <div>
                     hello!
                 </div>
             }
             
-            
-        </code>
-    </pre>
+        
+    
+    </code>
+</pre>
 
         </main>
     </div>
