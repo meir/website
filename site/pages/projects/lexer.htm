@@ -2,23 +2,86 @@
 +.title=Lexer;
 
 {$/components/template.htm:
-    <h2>Lexer</h2>
+    <h2>Static Lexer</h2>
     <p>
-        this website is made using a custom static site generator written in go.
-        it generates the html files from a different file structure with a small custom markup language.
-        the markup language is very simple and is used to include other files and to add some basic things such as metadata and content slots.
+        This website is made using a custom static site generator written in <a href="https://golang.org/">Go</a>.<wbr>
+        It generates the HTML files from a different file structure with a small custom lexer.<wbr>
+        The lexer is very simple and is used to include other files and to add some basic things such as metadata and content slots.<wbr>
     </p>
-    {$/components/code.htm:
-        +.lang=html;
-        `
-            +url = /;
-            +.title = Home;
-            {$/components/template.htm:
-                <div>
-                    hello!
-                </div>
-            }
-            
-        `
-    }
+    <p>
+        The syntax of this lexer is as followed:
+        <ul>
+            <li>
+                <b>+</b> is used to add metadata to the current file.<wbr>
+                <p>
+                    The metadata can either be a local variable or a global variable by prefixing it with a dot.<wbr>
+                    The global metadata can be accessed by files loaded in after the meta statement.<wbr>
+                    This means global metadata can be used to pass arguments to other files such as this:<wbr>
+                    {$/components/code.htm:
+                        +.lang=html;
+                        `
+                            +url = /;
+                            {$/components/code.htm:
+                                +.lang=go;
+                                \`
+                                    package main
+
+                                    func main() {
+                                        println("hello world!")
+                                    }
+                                \`
+                            }
+
+                        `
+                    }
+                </p>
+                <p>
+                    The metadata can also be used to retrieve metadata.<wbr>
+                    It can retrieve data from other files or from the global/local metadata.<wbr>
+                    For global/local metadata, local metadata is always higher priority.<wbr>
+                    <br>
+                    Metadata can be retrieved as followed:
+                    {$/components/code.htm:
+                        +.lang=html;
+                        `
+                            +local_data;
+                            +global_data;
+                            +$/data.htm:file_data;
+                        `
+                    }
+                </p>
+            </li>
+            <li>
+                <b>{}</b> is used to include other files.<wbr>
+                <p>
+                    The file included can be referenced either by a relative path or a path from root by prefixing it with a dollar sign.<wbr>
+                    When including a file, the lexer will either include the file as is or it will insert content into the file if any content has been given.<wbr>
+                    Content can be specified by using a colon right after the path.<wbr>
+                    <br>
+                    Files can be included as followed:
+                    {$/components/code.htm:
+                        +.lang=html;
+                        `
+                            {$/components/without_content.htm}
+                            {$/components/with_content.htm:
+                                <div>
+                                    hello!
+                                </div>
+                            }
+                            {./relative_path.htm}
+                        `
+                    }
+                </p>
+            </li>
+            <li>
+                <b>Strings</b>strings can be made using \", \', or \`<wbr>
+                <p>
+                    Everything inside strings will be taken literal, except for the escaped characters.<wbr>
+                    Though the lexer will not parse escaped characters as usual languages like \\n for example.<wbr>
+                    <br>
+                    In order to make the lexer as simplistic as possible, escaped characters will just mean that the lexer adds the character to the buffer and continues without processing the token.<wbr>
+                </p>
+            </li>
+        </ul>
+    </p>
 }
