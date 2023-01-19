@@ -87,6 +87,8 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			}
 		case STRING:
 			switch c {
+			case '\\':
+				l.skip = !l.skip
 			case '"', '\'', '`':
 				if l.buffer.Current().token_value == string(c) {
 					l.state = RAW
