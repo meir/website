@@ -26,7 +26,7 @@
         I used the QMK github repository as a reference for this aswell as numerous opensource projects trying to achieve the same thing.<br>
         I found out after a while that in order to make a keyboard matrix you would have to make all the input and output pins in columns and rows.<br>
         After that you activate each row one by one and check if any of the columns are activated.<br>
-        Using this you can map the outputs to the keys representing each column and row combination and BOOM! you have a keyboard matrix.<br>
+        Using this you can map the outputs to the keys representing each column and row combination and <b>BOOM!</b> you have a keyboard matrix.<br>
     </p>
     <p>
         Though this wasnt all i wanted, i wanted to add layers to the keyboard and make it a bit more customizable.<br>
@@ -37,7 +37,7 @@
     <p>
         Eventually i added some neat stuff like being able to have other keycodes such as media keys and mouse keys, aswell as modifiers such as shift and ctrl applied to a key.<br>
         This was tricky as i didn't know how to assign 2 keys to a single key in the matrix.<br>
-        Using the QMK library i found out its actually quite easy to do this. You just need to add a few extra bits to each key, for example if KEY_A 0b0100 and the CTRL modifier is 0b0001 you can just make a small lambda function to combine them like 0b0001 << 8 | 0b0100.<br>
+        Using the QMK library i found out its actually quite easy to do this. You just need to add a few extra bits to each key, for example if <code>KEY_A = 0b0100</code> and the <code>CTRL = 0b0001</code> you can just make a small lambda function to combine them like <code>0b0001 << 8 | 0b0100</code>.<br>
         Later in the code you can just check if the key pressed has a modifier attached to it and extract it from the key and send both the modifier and keycode through the USB HID.<br>
         Finally i used the same tactic to detect custom keycodes in order to allow you to have custom functions such as toggling the display or making macros.<br>
     </p>
