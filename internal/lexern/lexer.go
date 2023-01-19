@@ -3,8 +3,9 @@ package lexern
 type LexerState int
 
 type Lexer struct {
-	root  string
-	Debug bool
+	root   string
+	Debug  bool
+	global map[string]string
 }
 
 type FileLexer struct {
@@ -33,7 +34,8 @@ type Page struct {
 
 func NewLexer(root string) *Lexer {
 	return &Lexer{
-		root: root,
+		root:   root,
+		global: make(map[string]string),
 	}
 }
 

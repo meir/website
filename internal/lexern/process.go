@@ -159,6 +159,8 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				} else {
 					if meta, ok := l.page.Meta[state.token]; ok {
 						l.buffer.Add(meta)
+					} else if meta, ok := l.lexer.global[state.token]; ok {
+						l.buffer.Add(meta)
 					} else {
 						l.buffer.Add("(undefined: " + state.token + ")")
 					}
@@ -175,9 +177,20 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				state := l.buffer.Down()
 				l.debug("buffer -", l.buffer.Last(), state.token, state.token_value)
 				l.state = RAW
-				l.page.Meta[state.token] = state.token_value
+				if strings.HasSuffix(state.token_value, " ") {
+					state.token_value = state.token_value[:len(state.token_value)-1]
+				}
+				if strings.HasPrefix(state.token, ".") {
+					l.lexer.global[state.token[1:]] = state.token_value
+				} else {
+					l.page.Meta[state.token] = state.token_value
+				}
 			case ' ':
-				break
+				value := l.buffer.Current().token_value
+				if value == "" || value[len(value)-1] == ' ' {
+					break
+				}
+				l.buffer.Current().token_value += string(c)
 			default:
 				l.buffer.Current().token_value += string(c)
 			}

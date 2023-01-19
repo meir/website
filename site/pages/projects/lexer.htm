@@ -1,4 +1,5 @@
 +url=/projects/lexer;
++.title=Lexer;
 
 {$/components/template.htm:
     <h2>Lexer</h2>
@@ -7,18 +8,17 @@
         it generates the html files from a different file structure with a small custom markup language.
         the markup language is very simple and is used to include other files and to add some basic things such as metadata and content slots.
     </p>
-    <pre>
-        <code class="language-html">
-            `
+    {$/components/code.htm:
+        +.lang=html;
+        `
             +url = /;
-
+            +.title = Home;
             {$/components/template.htm:
                 <div>
                     hello!
                 </div>
             }
             
-            `
-        </code>
-    </pre>
+        `
+    }
 }
