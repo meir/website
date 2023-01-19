@@ -4,7 +4,6 @@ type LexerState int
 
 type Lexer struct {
 	root   string
-	Debug  bool
 	global map[string]string
 }
 
