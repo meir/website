@@ -49,6 +49,10 @@ main {
     padding: 1rem;
 }
 
+main * {
+    max-width: 600px;
+}
+
 code, code * {
     font-family: monospace !important;
 }
