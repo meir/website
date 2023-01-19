@@ -8,11 +8,13 @@ type Lexer struct {
 }
 
 type FileLexer struct {
-	buffer *Buffer
-	skip   bool
-	state  LexerState
-	lexer  *Lexer
-	file   string
+	buffer  *Buffer
+	skip    bool
+	state   LexerState
+	lexer   *Lexer
+	file    string
+	page    *Page
+	history []*FileLexer
 }
 
 const (
@@ -21,6 +23,7 @@ const (
 	META
 	META_VALUE
 	META_GET
+	STRING
 )
 
 type Page struct {
@@ -35,5 +38,5 @@ func NewLexer(root string) *Lexer {
 }
 
 func (l *Lexer) ProcessFile(root, filename string) (*Page, error) {
-	return l.process_file(root, filename, "")
+	return l.process_file(root, filename, "", nil)
 }

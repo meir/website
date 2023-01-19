@@ -7,18 +7,29 @@ import (
 	"strings"
 )
 
-func (l *Lexer) process_file(root, filename, content string) (*Page, error) {
+func (l *Lexer) process_file(root, filename, content string, history []*FileLexer) (*Page, error) {
 	if strings.HasPrefix(filename, "$") {
 		root = l.root
 		filename = filename[1:]
 	}
 
+	if history == nil {
+		history = []*FileLexer{}
+	} else {
+		for _, flh := range history {
+			if flh.file == path.Join(root, filename) {
+				return flh.page, nil
+			}
+		}
+	}
+
 	fl := &FileLexer{
-		buffer: &Buffer{},
-		skip:   false,
-		state:  RAW,
-		lexer:  l,
-		file:   path.Join(root, filename),
+		buffer:  &Buffer{},
+		skip:    false,
+		state:   RAW,
+		lexer:   l,
+		file:    path.Join(root, filename),
+		history: history,
 	}
 
 	data, err := os.ReadFile(path.Join(root, filename))
@@ -26,7 +37,12 @@ func (l *Lexer) process_file(root, filename, content string) (*Page, error) {
 		panic(err)
 	}
 
-	return fl.process_char(root, data, content)
+	err = fl.process_char(root, data, content)
+	if err != nil {
+		return nil, err
+	}
+
+	return fl.page, nil
 }
 
 func (l *FileLexer) debug(i ...interface{}) {
@@ -41,11 +57,13 @@ func (l *FileLexer) debugf(format string, i ...interface{}) {
 	}
 }
 
-func (l *FileLexer) process_char(root string, file []byte, cont string) (*Page, error) {
-	page := &Page{
+func (l *FileLexer) process_char(root string, file []byte, cont string) error {
+	l.page = &Page{
 		Meta:    make(map[string]string),
 		Content: cont,
 	}
+
+	l.history = append(l.history, l)
 
 	for _, c := range string(file) {
 		if l.skip {
@@ -72,11 +90,34 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) (*Page, 
 				l.debug("raw", "}")
 				state := l.buffer.Down()
 				l.debug("buffer -", l.buffer.Last(), state.token, state.token_value)
-				page, err := l.lexer.process_file(root, state.token, state.content)
+				page, err := l.lexer.process_file(root, state.token, state.content, l.history)
 				if err != nil {
 					panic(err)
 				}
 				l.buffer.Add(page.Content)
+			case '\\':
+				l.debug("raw", "\\")
+				l.skip = !l.skip
+			case '"', '\'', '`':
+				l.debug("raw", string(c))
+				l.state = STRING
+				l.buffer.Up()
+				l.buffer.Current().token_value = string(c)
+			default:
+				l.buffer.AddC(c)
+			}
+		case STRING:
+			switch c {
+			case '"', '\'', '`':
+				l.debug("string", string(c))
+				if l.buffer.Current().token_value == string(c) {
+					l.state = RAW
+					state := l.buffer.Down()
+					l.debug("buffer -", l.buffer.Last(), state.token, state.token_value)
+					l.buffer.Add(state.content)
+				} else {
+					l.buffer.AddC(c)
+				}
 			default:
 				l.buffer.AddC(c)
 			}
@@ -87,7 +128,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) (*Page, 
 				l.state = RAW
 				state := l.buffer.Down()
 				l.debug("buffer -", l.buffer.Last(), state.token, state.token_value)
-				page, err := l.lexer.process_file(root, state.token, "")
+				page, err := l.lexer.process_file(root, state.token, "", l.history)
 				if err != nil {
 					panic(err)
 				}
@@ -116,7 +157,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) (*Page, 
 				if state.token == "content" {
 					l.buffer.Add(cont)
 				} else {
-					if meta, ok := page.Meta[state.token]; ok {
+					if meta, ok := l.page.Meta[state.token]; ok {
 						l.buffer.Add(meta)
 					} else {
 						l.buffer.Add("(undefined: " + state.token + ")")
@@ -134,7 +175,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) (*Page, 
 				state := l.buffer.Down()
 				l.debug("buffer -", l.buffer.Last(), state.token, state.token_value)
 				l.state = RAW
-				page.Meta[state.token] = state.token_value
+				l.page.Meta[state.token] = state.token_value
 			case ' ':
 				break
 			default:
@@ -147,7 +188,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) (*Page, 
 				state := l.buffer.Down()
 				l.debug("buffer -", l.buffer.Last(), state.token, state.token_value)
 				l.state = RAW
-				page, err := l.lexer.process_file(root, state.token, "")
+				page, err := l.lexer.process_file(root, state.token, "", l.history)
 				if err != nil {
 					panic(err)
 				}
@@ -170,7 +211,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) (*Page, 
 		panic(fmt.Errorf("Unclosed tag in %s", l.file))
 	}
 
-	page.Content = l.buffer.String()
+	l.page.Content = l.buffer.String()
 
-	return page, nil
+	return nil
 }
