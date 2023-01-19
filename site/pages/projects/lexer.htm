@@ -12,7 +12,7 @@
         The syntax of this lexer is as followed:
         <ul>
             <li>
-                <b>+</b> is used to add metadata to the current file.<wbr>
+                <b>"+"</b> is used to add metadata to the current file.<wbr>
                 <p>
                     The metadata can either be a local variable or a global variable by prefixing it with a dot.<wbr>
                     The global metadata can be accessed by files loaded in after the meta statement.<wbr>
@@ -52,7 +52,7 @@
                 </p>
             </li>
             <li>
-                <b>{}</b> is used to include other files.<wbr>
+                <b>"{}"</b> is used to include other files.<wbr>
                 <p>
                     The file included can be referenced either by a relative path or a path from root by prefixing it with a dollar sign.<wbr>
                     When including a file, the lexer will either include the file as is or it will insert content into the file if any content has been given.<wbr>
