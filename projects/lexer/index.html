@@ -1,13 +1,58 @@
 
 
-
-
-<div>
-    
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <meta http-equiv=X-UA-Compatible content=IE=edge>
+    <meta name=viewport content=width=device-width, initial-scale=1.0>
+    <title>Document</title>
+    <link rel=stylesheet href=/assets/main.css>
+    <link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css>
+    <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
+</head>
+<body>
+    <header>
+        <a href=/>
+            <h1>YesImHuman</h1>
+        </a>
+    </header>
     <div>
-        this website is made using a custom static site generator written in go.
-        it generates the html files from a different file structure with a small custom markup language.
-        the markup language is very simple and is used to include other files and to add some basic things such as metadata and content slots.
-    </div>
+        
+<nav>
+    <details open>
+        <summary>
+            Projects
+        </summary>
+        <ul>
+            <li>
+                <a href="/projects/lexer">Custom static file generator</a>
+            </li>
+        </ul>
+    </details>
+</nav>
+        <main>
+            
+    this website is made using a custom static site generator written in go.
+    it generates the html files from a different file structure with a small custom markup language.
+    the markup language is very simple and is used to include other files and to add some basic things such as metadata and content slots.
+    <pre>
+        <code class=language-html>
+            
+            +url = /;
 
-</div>
+            {$/components/template.htm:
+                <div>
+                    hello!
+                </div>
+            }
+            
+            
+        </code>
+    </pre>
+
+        </main>
+    </div>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
