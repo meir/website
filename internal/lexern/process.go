@@ -87,7 +87,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				l.skipchar = true
 				l.buffer.RemoveLastLine()
 				l.buffer.Up()
-				l.buffer.Current().token_value = string("\"")
+				l.buffer.Current().token_value = string(c)
 			case ' ', '\n':
 				if !l.skipchar {
 					l.buffer.AddC(c)
@@ -105,7 +105,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 					l.state = RAW
 					l.skipchar = true
 					state := l.buffer.Down()
-					l.buffer.Add(state.content)
+					l.buffer.Add(fmt.Sprintf("\"%s\"", state.content))
 				} else {
 					l.buffer.AddC(c)
 				}
