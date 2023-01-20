@@ -104,7 +104,6 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				if l.buffer.Current().token_value == string(c) {
 					l.state = RAW
 					l.skipchar = true
-					l.buffer.Add("\"")
 					state := l.buffer.Down()
 					l.buffer.Add(state.content)
 				} else {
