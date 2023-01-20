@@ -8,13 +8,14 @@ type Lexer struct {
 }
 
 type FileLexer struct {
-	buffer  *Buffer
-	skip    bool
-	state   LexerState
-	lexer   *Lexer
-	file    string
-	page    *Page
-	history []*FileLexer
+	buffer   *Buffer
+	skip     bool
+	skipchar bool
+	state    LexerState
+	lexer    *Lexer
+	file     string
+	page     *Page
+	history  []*FileLexer
 }
 
 const (

@@ -76,14 +76,21 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 					panic(err)
 				}
 				l.buffer.Add(page.Content)
+				l.skipchar = true
 			case '\\':
 				l.skip = !l.skip
+				l.skipchar = false
 			case '"', '\'', '`':
 				l.state = STRING
 				l.buffer.Up()
 				l.buffer.Current().token_value = string(c)
+			case ' ', '\n':
+				if !l.skipchar {
+					l.buffer.AddC(c)
+				}
 			default:
 				l.buffer.AddC(c)
+				l.skipchar = false
 			}
 		case STRING:
 			switch c {
@@ -112,6 +119,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				l.buffer.Add(page.Content)
 			case ':':
 				l.state = RAW
+				l.skipchar = true
 
 			case ' ':
 				break
@@ -129,6 +137,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			case ';':
 				state := l.buffer.Down()
 				l.state = RAW
+				l.skipchar = true
 				if state.token == "content" {
 					l.buffer.Add(cont)
 				} else {
