@@ -105,7 +105,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 					l.state = RAW
 					l.skipchar = true
 					state := l.buffer.Down()
-					l.buffer.Add(fmt.Sprintf("\"%s\"", state.content))
+					l.buffer.Add(state.content)
 				} else {
 					l.buffer.AddC(c)
 				}
