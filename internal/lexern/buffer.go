@@ -54,5 +54,5 @@ func (b *Buffer) Current() *State {
 
 // RemoveLastLine removes all the last lines from the buffer that only include spaces and newlines
 func (b *Buffer) RemoveLastLine() {
-	b.Current().content = strings.TrimSpace(b.Current().content) + "\n"
+	b.Current().content = strings.TrimSpace(b.Current().content)
 }
