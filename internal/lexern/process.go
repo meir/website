@@ -114,6 +114,9 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 					l.buffer.AddC(c)
 				}
 			case '\n':
+				if !l.skipchar {
+					l.buffer.AddC(c)
+				}
 				l.skipchar = false
 			default:
 				l.buffer.AddC(c)
