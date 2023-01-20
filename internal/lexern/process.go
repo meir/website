@@ -104,19 +104,17 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				if l.buffer.Current().token_value == string(c) {
 					l.state = RAW
 					l.skipchar = true
-					l.buffer.RemoveLastLine()
 					state := l.buffer.Down()
 					l.buffer.Add(state.content)
 				} else {
 					l.buffer.AddC(c)
 				}
-			case ' ', '\n':
+			case ' ':
 				if !l.skipchar {
 					l.buffer.AddC(c)
 				}
-				if c == '\n' {
-					l.skipchar = false
-				}
+			case '\n':
+				l.skipchar = false
 			default:
 				l.buffer.AddC(c)
 				l.skipchar = false
