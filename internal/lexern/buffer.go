@@ -1,6 +1,9 @@
 package lexern
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type State struct {
 	token       string
@@ -47,4 +50,9 @@ func (b *Buffer) String() string {
 
 func (b *Buffer) Current() *State {
 	return b.Content[b.Last()]
+}
+
+func (b *Buffer) RemoveLastLine() {
+	lines := strings.Split(b.String(), "\n")
+	b.Content[b.Last()].content = strings.Join(lines[:len(lines)-1], "\n")
 }

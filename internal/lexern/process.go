@@ -59,7 +59,6 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			l.skip = false
 			continue
 		}
-		charsinline := 0
 
 		switch l.state {
 		case RAW:
@@ -83,17 +82,8 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				l.state = STRING
 				l.buffer.Up()
 				l.buffer.Current().token_value = string(c)
-			case '\n':
-				if charsinline > 0 {
-					l.buffer.AddC(c)
-				}
-			case ' ':
-				if charsinline > 0 {
-					l.buffer.AddC(c)
-				}
 			default:
 				l.buffer.AddC(c)
-				charsinline++
 			}
 		case STRING:
 			switch c {
@@ -122,6 +112,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				l.buffer.Add(page.Content)
 			case ':':
 				l.state = RAW
+
 			case ' ':
 				break
 			case '\n':
