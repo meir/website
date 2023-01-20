@@ -1,4 +1,64 @@
-<!DOCTYPEhtml><htmllang=en><head><metacharset=UTF-8><metahttp-equiv=X-UA-Compatiblecontent=IE=edge><metaname=viewportcontent=width=device-width, initial-scale=1.0><title>Lexer</title><linkrel=stylesheethref=/assets/main.css><linkrel=stylesheethref=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css><scriptsrc=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script></head><body><header><ahref=/><h1>YesImHuman</h1></a></header><div><nav><detailsopen><summary>Projects</summary><ulclass=simple><li><ahref="/projects/macropad">Macropad</a></li><li><ahref="/projects/lexer">StaticLexer</a></li></ul></details></nav><main><h2>StaticLexer</h2><p>Thiswebsiteismadeusingacustomstaticsitegeneratorwrittenin<ahref=https://golang.org/>Go</a>.<br>ItgeneratestheHTMLfilesfromadifferentfilestructurewithasmallcustomlexer.<br>Thelexerisverysimpleandisusedtoincludeotherfilesandtoaddsomebasicthingssuchasmetadataandcontentslots.<br></p><p>Thesyntaxofthislexerisasfollowed:<ul><li><details><summary><b>+</b>isusedtoaddmetadatatothecurrentfile.<br></summary><p>Themetadatacaneitherbealocalvariableoraglobalvariablebyprefixingitwithadot.<br>Theglobalmetadatacanbeaccessedbyfilesloadedinafterthemetastatement.<br>Thismeansglobalmetadatacanbeusedtopassargumentstootherfilessuchasthis:<br><pre><codeclass="language-html">
+
+
+
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <meta http-equiv=X-UA-Compatible content=IE=edge>
+    <meta name=viewport content=width=device-width, initial-scale=1.0>
+    <title>Lexer</title>
+    <link rel=stylesheet href=/assets/main.css>
+    <link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css>
+    <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
+</head>
+<body>
+    <header>
+        <a href=/>
+            <h1>YesImHuman</h1>
+        </a>
+    </header>
+    <div>
+        
+<nav>
+    <details open>
+        <summary>
+            Projects
+        </summary>
+        <ul class=simple>
+            <li>
+                <a href="/projects/macropad">Macropad</a>
+            </li>
+            <li>
+                <a href="/projects/lexer">Static Lexer</a>
+            </li>
+        </ul>
+    </details>
+</nav>
+        <main>
+            
+    <h2>Static Lexer</h2>
+    <p>
+        This website is made using a custom static site generator written in <a href=https://golang.org/>Go</a>.<br>
+        It generates the HTML files from a different file structure with a small custom lexer.<br>
+        The lexer is very simple and is used to include other files and to add some basic things such as metadata and content slots.<br>
+    </p>
+    <p>
+        The syntax of this lexer is as followed:
+        <ul>
+            <li>
+                <details>
+                    <summary><b>+</b> is used to add metadata to the current file. <br></summary>
+                    <p>
+                        The metadata can either be a local variable or a global variable by prefixing it with a dot. <br>
+                        The global metadata can be accessed by files loaded in after the meta statement. <br>
+                        This means global metadata can be used to pass arguments to other files such as this: <br>
+                        
+<pre>
+    <code class="language-html">
+        
+                            
+
     +url = /;
     {$/components/code.htm:
         +.lang=go;
@@ -11,11 +71,48 @@
         `
     }
 
-</code></pre></p><p>Themetadatacanalsobeusedtoretrievemetadata.<br>Itcanretrievedatafromotherfilesorfromtheglobal/localmetadata.<br>Forglobal/localmetadata,localmetadataisalwayshigherpriority.<br><br>Metadatacanberetrievedasfollowed:<pre><codeclass="language-html">
+
+                        
+    </code>
+</pre>
+                    </p>
+                    <p>
+                        The metadata can also be used to retrieve metadata. <br>
+                        It can retrieve data from other files or from the global/local metadata. <br>
+                        For global/local metadata, local metadata is always higher priority. <br>
+                        <br>
+                        Metadata can be retrieved as followed:
+                        
+<pre>
+    <code class="language-html">
+        
+                            
+
     +local_data;
     +global_data;
     +$/data.htm:file_data;
-</code></pre></p></details></li><li><details><summary><b>{}</b>isusedtoincludeotherfiles.<br></summary><p>Thefileincludedcanbereferencedeitherbyarelativepathorapathfromrootbyprefixingitwithadollarsign.<br>Whenincludingafile,thelexerwilleitherincludethefileasisoritwillinsertcontentintothefileifanycontenthasbeengiven.<br>Contentcanbespecifiedbyusingacolonrightafterthepath.<br><br>Filescanbeincludedasfollowed:<pre><codeclass="language-html">
+
+                        
+    </code>
+</pre>
+                    </p>
+                </details>
+            </li>
+            <li>
+                <details>
+                    <summary><b>{}</b> is used to include other files.<br></summary>
+                    <p>
+                        The file included can be referenced either by a relative path or a path from root by prefixing it with a dollar sign.<br>
+                        When including a file, the lexer will either include the file as is or it will insert content into the file if any content has been given.<br>
+                        Content can be specified by using a colon right after the path.<br>
+                        <br>
+                        Files can be included as followed:
+                        
+<pre>
+    <code class="language-html">
+        
+                            
+
     {$/components/without_content.htm}
     {$/components/with_content.htm:
         <div>
@@ -23,4 +120,29 @@
         </div>
     }
     {./relative_path.htm}
-</code></pre></p></details></li><li><details><summary><b>Strings</b>canbemadeusing",',or`<br></summary><p>Everythinginsidestringswillbetakenliteral,exceptfortheescapedcharacters.<br>Thoughthelexerwillnotparseescapedcharactersasusuallanguageslike\nforexample.<br><br>Inordertomakethelexerassimplisticaspossible,escapedcharacterswilljustmeanthatthelexeraddsthecharactertothebufferandcontinueswithoutprocessingthetoken.<br></p></details></li></ul></p></main></div><script>hljs.highlightAll();</script></body></html>
+
+                        
+    </code>
+</pre>
+                    </p>
+                </details>
+            </li>
+            <li>
+                <details>
+                    <summary><b>Strings</b> can be made using ", ', or `<br></summary>
+                    <p>
+                        Everything inside strings will be taken literal, except for the escaped characters.<br>
+                        Though the lexer will not parse escaped characters as usual languages like \n for example.<br>
+                        <br>
+                        In order to make the lexer as simplistic as possible, escaped characters will just mean that the lexer adds the character to the buffer and continues without processing the token.<br>
+                    </p>
+                </details>
+            </li>
+        </ul>
+    </p>
+
+        </main>
+    </div>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
