@@ -48,17 +48,7 @@
                         The global metadata can be accessed by files loaded in after the meta statement. <br>
                         This means global metadata can be used to pass arguments to other files such as this: <br>
                         <pre>
-    <code class="language-html">+url = /;
-    {$/components/code.htm:
-        +.lang=go;
-        `
-            package main
-
-            func main() {
-                println("hello world!")
-            }
-        `
-    }</code>
+    <code class="language-html">+url = /;    {$/components/code.htm:        +.lang=go;        `            package main            func main() {                println("hello world!")            }        `    }</code>
 </pre></p>
                     <p>
                         The metadata can also be used to retrieve metadata. <br>
@@ -67,9 +57,7 @@
                         <br>
                         Metadata can be retrieved as followed:
                         <pre>
-    <code class="language-html">+local_data;
-    +global_data;
-    +$/data.htm:file_data;</code>
+    <code class="language-html">    +local_data;    +global_data;    +$/data.htm:file_data;</code>
 </pre></p>
                 </details>
             </li>
@@ -83,13 +71,7 @@
                         <br>
                         Files can be included as followed:
                         <pre>
-    <code class="language-html">{$/components/without_content.htm}
-    {$/components/with_content.htm:
-        <div>
-            hello!
-        </div>
-    }
-    {./relative_path.htm}</code>
+    <code class="language-html">    {$/components/without_content.htm}    {$/components/with_content.htm:        <div>            hello!        </div>    }    {./relative_path.htm}</code>
 </pre></p>
                 </details>
             </li>
