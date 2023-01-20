@@ -52,18 +52,7 @@ func (b *Buffer) Current() *State {
 	return b.Content[b.Last()]
 }
 
+// RemoveLastLine removes all the last lines from the buffer that only include spaces and newlines
 func (b *Buffer) RemoveLastLine() {
-	lines := strings.Split(b.String(), "\n")
-	lastline := lines[len(lines)-1]
-	onlyspaces := true
-	for i := 0; i < len(lastline); i++ {
-		if lastline[i] != ' ' {
-			onlyspaces = false
-			break
-		}
-	}
-
-	if onlyspaces {
-		b.Content[b.Last()].content = strings.Join(lines[:len(lines)-1], "\n") + "\n"
-	}
+	b.Current().content = strings.TrimSpace(b.Current().content) + "\n"
 }
