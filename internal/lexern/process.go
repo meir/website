@@ -98,6 +98,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			switch c {
 			case '\\':
 				l.skip = !l.skip
+				l.skipchar = false
 			case '\'', '`':
 				if l.buffer.Current().token_value == string(c) {
 					l.state = RAW
@@ -106,6 +107,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 					l.buffer.Add(state.content)
 				} else {
 					l.buffer.AddC(c)
+					l.skipchar = false
 				}
 			case ' ', '\n':
 				if !l.skipchar {
