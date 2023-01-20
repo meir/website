@@ -58,6 +58,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			l.buffer.AddC(c)
 			l.skip = false
 			l.skipchar = true
+			l.buffer.RemoveLastLine()
 			continue
 		}
 
@@ -78,12 +79,14 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				}
 				l.buffer.Add(page.Content)
 				l.skipchar = true
+				l.buffer.RemoveLastLine()
 			case '\\':
 				l.skip = !l.skip
 				l.skipchar = false
 			case '\'', '`':
 				l.state = STRING
 				l.skipchar = true
+				l.buffer.RemoveLastLine()
 				l.buffer.Up()
 				l.buffer.Current().token_value = string(c)
 			case ' ', '\n':
@@ -103,6 +106,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				if l.buffer.Current().token_value == string(c) {
 					l.state = RAW
 					l.skipchar = true
+					l.buffer.RemoveLastLine()
 					state := l.buffer.Down()
 					l.buffer.Add(state.content)
 				} else {
@@ -130,6 +134,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			case ':':
 				l.state = RAW
 				l.skipchar = true
+				l.buffer.RemoveLastLine()
 
 			case ' ':
 				break
@@ -148,6 +153,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 				state := l.buffer.Down()
 				l.state = RAW
 				l.skipchar = true
+				l.buffer.RemoveLastLine()
 				if state.token == "content" {
 					l.buffer.Add(cont)
 				} else {

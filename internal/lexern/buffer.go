@@ -54,5 +54,16 @@ func (b *Buffer) Current() *State {
 
 func (b *Buffer) RemoveLastLine() {
 	lines := strings.Split(b.String(), "\n")
-	b.Content[b.Last()].content = strings.Join(lines[:len(lines)-1], "\n")
+	lastline := lines[len(lines)-1]
+	onlyspaces := true
+	for i := 0; i < len(lastline); i++ {
+		if lastline[i] != ' ' {
+			onlyspaces = false
+			break
+		}
+	}
+
+	if onlyspaces {
+		b.Content[b.Last()].content = strings.Join(lines[:len(lines)-1], "\n") + "\n"
+	}
 }
