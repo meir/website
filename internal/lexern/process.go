@@ -57,6 +57,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 		if l.skip {
 			l.buffer.AddC(c)
 			l.skip = false
+			l.skipchar = true
 			continue
 		}
 
