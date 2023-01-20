@@ -36,8 +36,7 @@
     </details>
 </nav>
         <main>
-            
-    <h2>Static Lexer</h2>
+            <h2>Static Lexer</h2>
     <p>
         This website is made using a custom static site generator written in <a href=https://golang.org/>Go</a>.<br>
         It generates the HTML files from a different file structure with a small custom lexer.<br>
@@ -57,8 +56,6 @@
 <pre>
     <code class="language-html">
         
-                            
-
     +url = /;
     {$/components/code.htm:
         +.lang=go;
@@ -71,11 +68,8 @@
         `
     }
 
-
-                        
-    </code>
-</pre>
-                    </p>
+</code>
+</pre></p>
                     <p>
                         The metadata can also be used to retrieve metadata. <br>
                         It can retrieve data from other files or from the global/local metadata. <br>
@@ -86,16 +80,11 @@
 <pre>
     <code class="language-html">
         
-                            
-
     +local_data;
     +global_data;
     +$/data.htm:file_data;
-
-                        
-    </code>
-</pre>
-                    </p>
+</code>
+</pre></p>
                 </details>
             </li>
             <li>
@@ -111,8 +100,6 @@
 <pre>
     <code class="language-html">
         
-                            
-
     {$/components/without_content.htm}
     {$/components/with_content.htm:
         <div>
@@ -120,11 +107,8 @@
         </div>
     }
     {./relative_path.htm}
-
-                        
-    </code>
-</pre>
-                    </p>
+</code>
+</pre></p>
                 </details>
             </li>
             <li>
@@ -140,8 +124,7 @@
             </li>
         </ul>
     </p>
-
-        </main>
+</main>
     </div>
     <script>hljs.highlightAll();</script>
 </body>
