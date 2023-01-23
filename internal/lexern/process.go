@@ -52,6 +52,7 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 	}
 
 	l.history = append(l.history, l)
+	indentation := -1
 
 	for _, c := range string(file) {
 		if l.skip {
@@ -59,6 +60,12 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			l.skip = false
 			l.buffer.RemoveLastLine()
 			continue
+		}
+
+		if c == '\n' {
+			indentation = -1
+		} else {
+			indentation++
 		}
 
 		switch l.state {
@@ -100,12 +107,23 @@ func (l *FileLexer) process_char(root string, file []byte, cont string) error {
 			switch c {
 			case '\\':
 				l.skip = !l.skip
+			case '|':
+				if l.skipchar {
+					l.buffer.Current().indentation = strings.Repeat(" ", indentation)
+				} else {
+					l.buffer.AddC(c)
+				}
 			case '\'', '`':
 				if l.buffer.Current().token_value == string(c) {
 					l.state = RAW
 					l.skipchar = true
 					state := l.buffer.Down()
-					l.buffer.Add(state.content)
+					lines := strings.Split(state.content, "\n")
+					for i, line := range lines {
+						lines[i] = strings.Replace(line, state.indentation, "", 1)
+					}
+					state.content = strings.Join(lines, "\n")
+					l.buffer.Add(strings.Trim(state.content, "\n"))
 				} else {
 					l.buffer.AddC(c)
 				}

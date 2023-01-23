@@ -8,6 +8,7 @@ import (
 type State struct {
 	token       string
 	token_value string
+	indentation string
 	content     string
 }
 
@@ -50,6 +51,10 @@ func (b *Buffer) String() string {
 
 func (b *Buffer) Current() *State {
 	return b.Content[b.Last()]
+}
+
+func (b *Buffer) DeleteLastChar() {
+	b.Content = b.Content[:len(b.Content)-1]
 }
 
 // RemoveLastLine removes all the last lines from the buffer that only include spaces and newlines

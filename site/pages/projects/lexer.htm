@@ -12,7 +12,7 @@
         The syntax of this lexer is as followed:
         <ul>
             <li>
-                <details>
+                <details open>
                     <summary><b>`+`</b> is used to add metadata to the current file. <br></summary>
                     <p>
                         The metadata can either be a local variable or a global variable by prefixing it with a dot. <br>
@@ -20,21 +20,20 @@
                         This means global metadata can be used to pass arguments to other files such as this: <br>
                         {$/components/code.htm:
                             +.lang=html;
-`
-
-    +url = /;
-    {$/components/code.htm:
-        +.lang=go;
-        \`
-            package main
-
-            func main() {
-                println("hello world!")
-            }
-        \`
-    }
-
-`
+                            `   |
+                                +url = /;
+                                {$/components/code.htm:
+                                    +.lang=go;
+                                    \`
+                                        package main
+                                
+                                        func main() {
+                                            println("hello world!")
+                                        }
+                                    \`
+                                }
+                            
+                            `
                         }
                     </p>
                     <p>
@@ -45,17 +44,17 @@
                         Metadata can be retrieved as followed:
                         {$/components/code.htm:
                             +.lang=html;
-`
-    +local_data;
-    +global_data;
-    +$/data.htm:file_data;
-`
+                            `   |
+                                +local_data;
+                                +global_data;
+                                +$/data.htm:file_data;
+                            `
                         }
                     </p>
                 </details>
             </li>
             <li>
-                <details>
+                <details open>
                     <summary><b>`{}`</b> is used to include other files.<br></summary>
                     <p>
                         The file included can be referenced either by a relative path or a path from root by prefixing it with a dollar sign.<br>
@@ -65,27 +64,46 @@
                         Files can be included as followed:
                         {$/components/code.htm:
                             +.lang=html;
-`
-    {$/components/without_content.htm}
-    {$/components/with_content.htm:
-        <div>
-            hello!
-        </div>
-    }
-    {./relative_path.htm}
-`
+                            `   |
+                                {$/components/without_content.htm}
+                                {$/components/with_content.htm:
+                                    <div>
+                                        hello!
+                                    </div>
+                                }
+                                {./relative_path.htm}
+                            `
                         }
                     </p>
                 </details>
             </li>
             <li>
-                <details>
+                <details open>
                     <summary><b>Strings</b> can be made using \", \', or \`<br></summary>
                     <p>
                         Everything inside strings will be taken literal, except for the escaped characters.<br>
                         Though the lexer will not parse escaped characters as usual languages like \\n for example.<br>
                         <br>
                         In order to make the lexer as simplistic as possible, escaped characters will just mean that the lexer adds the character to the buffer and continues without processing the token.<br>
+                    </p>
+                    <p>
+                        One issue ive fixed with a workaround is indenting within strings.<br>
+                        Code blocks for example are hard since you cant indent them within the code since those indentations will show up in the html view.<br>
+                        To fix this, i made it so that the lexer will allow you to place a string indentation token right after the opening string token.<br>
+                        This token will be used to determine the indentation of the string.<br>
+                        <br>
+                        String indentations can be made as followed:
+                        {$/components/code.htm:
+                            +.lang=html;
+                            `   |
+                                {$component.htm:
+                                    \`    |
+                                          this is where the indentation starts.
+                                          marked by the horizontal line above right after the string opening on the same line.
+                                    \`
+                                }
+                            `
+                        }
                     </p>
                 </details>
             </li>

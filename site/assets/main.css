@@ -40,13 +40,11 @@ body > div {
 }
 
 nav {
-    width: 20%;
-    border-right: 1px dotted black;
     padding: 1rem;
+    margin-right: 2rem;
 }
 
 main {
-    width: 80%;
     padding: 1rem;
 }
 
@@ -76,8 +74,7 @@ p {
     
     nav {
         width: 100%;
-        border-right: none;
-        border-bottom: 1px dotted black;
+        margin-bottom: 2rem;
     }
     
     main {
