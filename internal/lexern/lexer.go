@@ -39,6 +39,10 @@ func NewLexer(root string) *Lexer {
 	}
 }
 
+func (l *Lexer) SetGlobal(key, value string) {
+	l.global[key] = value
+}
+
 func (l *Lexer) ProcessFile(root, filename string) (*Page, error) {
 	return l.process_file(root, filename, "", nil)
 }

@@ -4,20 +4,20 @@
 {$/components/template.htm:
     <h2>Static Lexer</h2>
     <p>
-        This website is made using a custom static site generator written in <a href="https://golang.org/">Go</a>.<br>
-        It generates the HTML files from a different file structure with a small custom lexer.<br>
-        The lexer is very simple and is used to include other files and to add some basic things such as metadata and content slots.<br>
+        This website is made using a custom static site generator written in <a href="https://golang.org/">Go</a>.
+        It generates the HTML files from a different file structure with a small custom lexer.
+        The lexer is very simple and is used to include other files and to add some basic things such as metadata and content slots.
     </p>
     <p>
         The syntax of this lexer is as followed:
         <ul>
             <li>
                 <details open>
-                    <summary><b>`+`</b> is used to add metadata to the current file. <br></summary>
+                    <summary><b>`+`</b> is used to add metadata to the current file. </summary>
                     <p>
-                        The metadata can either be a local variable or a global variable by prefixing it with a dot. <br>
-                        The global metadata can be accessed by files loaded in after the meta statement. <br>
-                        This means global metadata can be used to pass arguments to other files such as this: <br>
+                        The metadata can either be a local variable or a global variable by prefixing it with a dot. 
+                        The global metadata can be accessed by files loaded in after the meta statement. 
+                        This means global metadata can be used to pass arguments to other files such as this: 
                         {$/components/code.htm:
                             +.lang=html;
                             `   |
@@ -37,10 +37,10 @@
                         }
                     </p>
                     <p>
-                        The metadata can also be used to retrieve metadata. <br>
-                        It can retrieve data from other files or from the global/local metadata. <br>
-                        For global/local metadata, local metadata is always higher priority. <br>
-                        <br>
+                        The metadata can also be used to retrieve metadata. 
+                        It can retrieve data from other files or from the global/local metadata. 
+                        For global/local metadata, local metadata is always higher priority. 
+                        
                         Metadata can be retrieved as followed:
                         {$/components/code.htm:
                             +.lang=html;
@@ -55,12 +55,12 @@
             </li>
             <li>
                 <details open>
-                    <summary><b>`{}`</b> is used to include other files.<br></summary>
+                    <summary><b>`{}`</b> is used to include other files.</summary>
                     <p>
-                        The file included can be referenced either by a relative path or a path from root by prefixing it with a dollar sign.<br>
-                        When including a file, the lexer will either include the file as is or it will insert content into the file if any content has been given.<br>
-                        Content can be specified by using a colon right after the path.<br>
-                        <br>
+                        The file included can be referenced either by a relative path or a path from root by prefixing it with a dollar sign.
+                        When including a file, the lexer will either include the file as is or it will insert content into the file if any content has been given.
+                        Content can be specified by using a colon right after the path.
+                        
                         Files can be included as followed:
                         {$/components/code.htm:
                             +.lang=html;
@@ -79,19 +79,19 @@
             </li>
             <li>
                 <details open>
-                    <summary><b>Strings</b> can be made using \", \', or \`<br></summary>
+                    <summary><b>Strings</b> can be made using \", \', or \`</summary>
                     <p>
-                        Everything inside strings will be taken literal, except for the escaped characters.<br>
-                        Though the lexer will not parse escaped characters as usual languages like \\n for example.<br>
-                        <br>
-                        In order to make the lexer as simplistic as possible, escaped characters will just mean that the lexer adds the character to the buffer and continues without processing the token.<br>
+                        Everything inside strings will be taken literal, except for the escaped characters.
+                        Though the lexer will not parse escaped characters as usual languages like \\n for example.
+                        
+                        In order to make the lexer as simplistic as possible, escaped characters will just mean that the lexer adds the character to the buffer and continues without processing the token.
                     </p>
                     <p>
-                        One issue ive fixed with a workaround is indenting within strings.<br>
-                        Code blocks for example are hard since you cant indent them within the code since those indentations will show up in the html view.<br>
-                        To fix this, i made it so that the lexer will allow you to place a string indentation token right after the opening string token.<br>
-                        This token will be used to determine the indentation of the string.<br>
-                        <br>
+                        One issue ive fixed with a workaround is indenting within strings.
+                        Code blocks for example are hard since you cant indent them within the code since those indentations will show up in the html view.
+                        To fix this, i made it so that the lexer will allow you to place a string indentation token right after the opening string token.
+                        This token will be used to determine the indentation of the string.
+                        
                         String indentations can be made as followed:
                         {$/components/code.htm:
                             +.lang=html;

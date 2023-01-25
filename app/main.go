@@ -6,7 +6,9 @@ import (
 	"io"
 	"os"
 	"path"
+	"runtime"
 	"strings"
+	"time"
 
 	"github.com/flamingo-development/static/internal/lexern"
 )
@@ -19,6 +21,14 @@ func main() {
 
 	lexer := lexern.NewLexer(*folder)
 	os.MkdirAll(path.Join(*output, "/assets"), 0755)
+
+	lexer.SetGlobal("build_date", time.Now().Format("2006-01-02 15:04:05"))
+	lexer.SetGlobal("year", time.Now().Format("2006"))
+	lexer.SetGlobal("version", "0.0.1")
+	lexer.SetGlobal("time", time.Now().Format("15:04:05"))
+	lexer.SetGlobal("go_version", runtime.Version())
+	lexer.SetGlobal("go_os", runtime.GOOS)
+	lexer.SetGlobal("go_arch", runtime.GOARCH)
 
 	pages, err := load_dir(*folder, lexer)
 	if err != nil {
