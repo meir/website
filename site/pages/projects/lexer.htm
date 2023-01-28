@@ -1,7 +1,7 @@
-+url=/projects/lexer;
-+.title=Lexer;
+#url=/projects/lexer;
+#title=Lexer;
 
-{$/components/template.htm:
+{template:
     <h2>Static Lexer</h2>
     <p>
         This website is made using a custom static site generator written in <a href="https://golang.org/">Go</a>.
@@ -18,11 +18,11 @@
                         The metadata can either be a local variable or a global variable by prefixing it with a dot. 
                         The global metadata can be accessed by files loaded in after the meta statement. 
                         This means global metadata can be used to pass arguments to other files such as this: 
-                        {$/components/code.htm:
-                            +.lang=html;
-                            `   |
+                        {code:
+                            #.lang=html;
+                            `
                                 +url = /;
-                                {$/components/code.htm:
+                                {code:
                                     +.lang=go;
                                     \`
                                         package main
@@ -42,9 +42,9 @@
                         For global/local metadata, local metadata is always higher priority. 
                         
                         Metadata can be retrieved as followed:
-                        {$/components/code.htm:
-                            +.lang=html;
-                            `   |
+                        {code:
+                            #.lang=html;
+                            `
                                 +local_data;
                                 +global_data;
                                 +$/data.htm:file_data;
@@ -62,9 +62,9 @@
                         Content can be specified by using a colon right after the path.
                         
                         Files can be included as followed:
-                        {$/components/code.htm:
-                            +.lang=html;
-                            `   |
+                        {code:
+                            #.lang=html;
+                            `
                                 {$/components/without_content.htm}
                                 {$/components/with_content.htm:
                                     <div>
@@ -93,11 +93,11 @@
                         This token will be used to determine the indentation of the string.
                         
                         String indentations can be made as followed:
-                        {$/components/code.htm:
-                            +.lang=html;
-                            `   |
+                        {code:
+                            #.lang=html;
+                            `
                                 {$component.htm:
-                                    \`    |
+                                    \` 
                                           this is where the indentation starts.
                                           marked by the horizontal line above right after the string opening on the same line.
                                     \`

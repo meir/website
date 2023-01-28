@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/flamingo-development/static/internal/lexern"
+	"github.com/flamingo-development/static/internal/lexern2"
 )
 
 var folder = flag.String("i", "./site", "Folder to build from")
@@ -19,7 +19,7 @@ var output = flag.String("o", "./build", "Folder to build to")
 func main() {
 	flag.Parse()
 
-	lexer := lexern.NewLexer(*folder)
+	lexer := lexern2.NewLexer(*folder)
 	os.MkdirAll(path.Join(*output, "/assets"), 0755)
 
 	lexer.SetGlobal("build_date", time.Now().Format("2006-01-02 15:04:05"))
@@ -30,45 +30,42 @@ func main() {
 	lexer.SetGlobal("go_os", runtime.GOOS)
 	lexer.SetGlobal("go_arch", runtime.GOARCH)
 
-	pages, err := load_dir(*folder, lexer)
+	err := load_dir(*folder, lexer)
 	if err != nil {
 		panic(err)
 	}
 
-	//write files into output folder in folders named after the url
+	lexer.Process()
+
+	pages := lexer.GetByMetaKey("url")
 	for _, page := range pages {
-		if page.Meta["url"] != "" {
-			os.MkdirAll(path.Join(*output, page.Meta["url"]), 0755)
-			err := os.WriteFile(path.Join(
-				*output,
-				page.Meta["url"],
-				"index.html",
-			), []byte(page.Content), 0644)
-			if err != nil {
-				panic(err)
-			}
+		filepath := page.Metadata["url"].String(page, nil)
+		content := page.String(page, nil)
+		p := path.Join(*output, filepath)
+		os.MkdirAll(p, 0755)
+		fmt.Printf("----- %s ------\n%s\n====================\n", path.Join(p, "index.html"), content)
+		err := os.WriteFile(
+			path.Join(p, "index.html"),
+			[]byte(content),
+			0755,
+		)
+		if err != nil {
+			panic(err)
 		}
 	}
-
 }
 
-func load_dir(f string, lexer *lexern.Lexer) (map[string]*lexern.Page, error) {
+func load_dir(f string, lexer *lexern2.Lexer) error {
 	dir, err := os.ReadDir(f)
 	if err != nil {
 		panic(err)
 	}
 
-	pages := make(map[string]*lexern.Page)
-
 	for _, file := range dir {
 		if file.IsDir() {
-			subpages, err := load_dir(path.Join(f, file.Name()), lexer)
+			err := load_dir(path.Join(f, file.Name()), lexer)
 			if err != nil {
 				panic(err)
-			}
-
-			for url, page := range subpages {
-				pages[url] = page
 			}
 			continue
 		}
@@ -81,17 +78,15 @@ func load_dir(f string, lexer *lexern.Lexer) (map[string]*lexern.Page, error) {
 			continue
 		}
 
-		page, err := lexer.ProcessFile(f, file.Name())
-		if err != nil {
-			panic(err)
-		}
-
-		if page.Meta["url"] != "" {
-			pages[page.Meta["url"]] = page
-		}
+		lexer.LoadFile(
+			lexern2.FileProcessOptions{
+				Root: *folder,
+				File: path.Join(f, file.Name()),
+			},
+		)
 	}
 
-	return pages, nil
+	return nil
 }
 
 func copy(src, dst string) (int64, error) {
