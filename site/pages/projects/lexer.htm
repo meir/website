@@ -12,7 +12,7 @@
         The syntax of this lexer is as followed:
         <ul>
             <li>
-                <details open>
+                <details>
                     <summary><b>`+`</b> is used to add metadata to the current file. </summary>
                     <p>
                         The metadata can either be a local variable or a global variable by prefixing it with a dot. 
@@ -54,7 +54,7 @@
                 </details>
             </li>
             <li>
-                <details open>
+                <details>
                     <summary><b>`{}`</b> is used to include other files.</summary>
                     <p>
                         The file included can be referenced either by a relative path or a path from root by prefixing it with a dollar sign.
@@ -78,7 +78,7 @@
                 </details>
             </li>
             <li>
-                <details open>
+                <details>
                     <summary><b>Strings</b> can be made using \", \', or \`</summary>
                     <p>
                         Everything inside strings will be taken literal, except for the escaped characters.
@@ -89,7 +89,7 @@
                     <p>
                         One issue ive fixed with a workaround is indenting within strings.
                         Code blocks for example are hard since you cant indent them within the code since those indentations will show up in the html view.
-                        To fix this, i made it so that the lexer will allow you to place a string indentation token right after the opening string token.
+                        To fix this, i made it so that the lexer will allow you to place a string indentation token right after theing string token.
                         This token will be used to determine the indentation of the string.
                         
                         String indentations can be made as followed:
@@ -108,5 +108,38 @@
                 </details>
             </li>
         </ul>
+    </p>
+
+    <h2>Update</h2>
+    <p>
+        I've been working on updating the lexer, i've made an entirely new version since the previous one was very messy and hard to work with.
+        The new lexer, "lexern2" is much more simple and easy to work with, but at the same time also more complex.
+        The lexer is now able to parse more complex things such as statements and expressions.
+        Before the lexer was only able to do static things and could not import data from files that werent loaded yet.
+        The new lexer's process looks as followed:
+        <ol>
+            <li>
+                A new lexer will be made.
+            </li>
+            <li>
+                The lexer will be given every file found.
+            </li>
+            <li>
+                The files loaded in will parse through them and save the statements as different nodes.
+            </li>
+            <li>
+                Once all files are parsed it will call the String method which will go through all the nodes saved per page and generate the html.
+            </li>
+            <li>
+                The generated html will be saved in the corresponding location of the url metadata.
+            </li>
+        </ol>
+    </p>
+    <p>
+        My next 2 goals is to make the lexer be able to call small functions in order to find all the pages using a certain metadata and loop through it.
+        Mainly to make the navigation bar easier to update.
+        The second goal is to make the lexer logging more useful to find issues, i want to make it so that it logs the line and column of the error.
+        So far syntactically the lexer hasnt changed much, the biggest change is that metadata uses the <code>`#`</code> token instead of <code>`+`</code> to save metadata.
+        <code>`+`</code> is only used to insert metadata to the current file.
     </p>
 }
