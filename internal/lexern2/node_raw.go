@@ -49,6 +49,9 @@ func (n *NodeRaw) Process(p *Page) error {
 		}
 
 		if !n.Root && r == '}' {
+			n.Nodes = append(n.Nodes, &NodeRune{
+				Content: string(n.Content),
+			})
 			break
 		}
 
