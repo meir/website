@@ -57,7 +57,9 @@ func (n *NodeString) String(p *Page, content NodeInterface, args ...string) stri
 
 func (n *NodeString) Detect(p *Page) (bool, error) {
 	r, _, err := p.Reader.ReadRune()
-	if err != nil && err.Error() != "EOF" {
+	if err == io.EOF {
+		return false, nil
+	} else if err != nil {
 		panic(err)
 	}
 
