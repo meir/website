@@ -16,35 +16,34 @@ func (n *NodeString) InternalNodes() []NodeInterface {
 
 func (n *NodeString) Process(p *Page) error {
 	for {
-		nodes, new, err := ScanContent(n, p)
+		node, err := ScanContent(n, p)
 		if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
-		if new {
+		if node != nil {
 			runeNode := NodeRune{
 				Content: string(n.Content),
 			}
 			n.Nodes = append(n.Nodes, &runeNode)
 			n.Content = ""
-			n.Nodes = append(n.Nodes, nodes...)
+			n.Nodes = append(n.Nodes, node)
 			continue
 		}
 
 		r, _, err := p.Reader.ReadRune()
 		if err == io.EOF {
-			break
+			return nil
 		} else if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
 		if r == n.StringChar {
-			break
+			return nil
 		}
 
 		n.Content += string(r)
 	}
-	return nil
 }
 
 func (n *NodeString) String(p *Page, content NodeInterface, args ...string) string {
@@ -60,7 +59,7 @@ func (n *NodeString) Detect(p *Page) (bool, error) {
 	if err == io.EOF {
 		return false, nil
 	} else if err != nil {
-		panic(err)
+		p.Err(err)
 	}
 
 	if r == '`' {

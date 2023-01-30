@@ -16,36 +16,36 @@ func (n *NodeMetadataValue) InternalNodes() []NodeInterface {
 
 func (n *NodeMetadataValue) Process(p *Page) error {
 	for {
-		nodes, new, err := ScanContent(n, p)
+		node, err := ScanContent(n, p)
 		if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
-		if new {
+		if node != nil {
 			runeNode := NodeRune{
 				Content: string(n.Content),
 			}
 			n.Nodes = append(n.Nodes, &runeNode)
 			n.Content = ""
-			n.Nodes = append(n.Nodes, nodes...)
+			n.Nodes = append(n.Nodes, node)
 			continue
 		}
 
 		r, _, err := p.Reader.ReadRune()
 		if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
-		if r == ';' {
+		switch r {
+		case ';':
 			n.Nodes = append(n.Nodes, &NodeRune{
 				Content: string(n.Content),
 			})
-			break
+			return nil
+		default:
+			n.Content += string(r)
 		}
-
-		n.Content += string(r)
 	}
-	return nil
 }
 
 func (n *NodeMetadataValue) String(p *Page, content NodeInterface, args ...string) string {

@@ -1,7 +1,5 @@
 package lexern2
 
-import "strings"
-
 type NodeType int
 
 const (
@@ -25,7 +23,7 @@ type Page struct {
 	Content   string
 	Metadata  map[string]NodeInterface
 	Arguments map[string]string
-	Reader    strings.Reader
+	Reader    *Reader
 }
 
 type PageInterface interface {

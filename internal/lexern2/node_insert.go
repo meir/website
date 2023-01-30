@@ -1,10 +1,9 @@
 package lexern2
 
 import (
-	"fmt"
+	"errors"
 	"io"
 	"path"
-	"strings"
 )
 
 type NodeInsert struct {
@@ -17,30 +16,38 @@ func (n *NodeInsert) InternalNodes() []NodeInterface {
 }
 
 func (n *NodeInsert) Process(p *Page) error {
+	token_name := false
 	for {
 		r, _, err := p.Reader.ReadRune()
 		if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
-		if r == ';' {
-			line := strings.Split(n.token, ":")
-			if len(line) >= 2 {
-				n.token = line[0]
-				n.token_name = strings.Join(line[1:], ":")
+		switch r {
+		case ' ':
+			continue
+		case ':':
+			if !token_name {
+				token_name = true
+				continue
 			}
-			break
+			n.token_name += string(r)
+		case ';':
+			return nil
+		default:
+			if token_name {
+				n.token_name += string(r)
+			} else {
+				n.token += string(r)
+			}
 		}
-
-		n.token += string(r)
 	}
-	return nil
 }
 
 func (n *NodeInsert) String(p *Page, content NodeInterface, args ...string) string {
 	if n.token == "content" {
 		if content == nil {
-			panic("Content not found")
+			p.Err(errors.New("Content not found"))
 		}
 		return content.String(p, content, args...)
 	}
@@ -55,8 +62,8 @@ func (n *NodeInsert) String(p *Page, content NodeInterface, args ...string) stri
 		}
 	}
 
-	fmt.Println(p.Metadata, p.Src)
-	panic("File not found: " + n.token)
+	p.Err(errors.New("File not found: " + n.token))
+	return ""
 }
 
 func (n *NodeInsert) Detect(p *Page) (bool, error) {
@@ -64,7 +71,7 @@ func (n *NodeInsert) Detect(p *Page) (bool, error) {
 	if err == io.EOF {
 		return false, nil
 	} else if err != nil {
-		panic(err)
+		p.Err(err)
 	}
 
 	if r == '+' {

@@ -17,16 +17,17 @@ func (n *NodeMetadata) Process(p *Page) error {
 	for {
 		r, _, err := p.Reader.ReadRune()
 		if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
-		if r == '=' {
+		switch r {
+		case '=':
 			value := &NodeMetadataValue{}
 			value.Process(p)
 
 			if strings.HasPrefix(n.Token, ".") {
 				p.Lexer.Global[n.Token[1:]] = value
-				break
+				return nil
 			}
 
 			switch n.Token {
@@ -35,16 +36,22 @@ func (n *NodeMetadata) Process(p *Page) error {
 			default:
 				p.Metadata[n.Token] = value
 			}
-			break
-		}
+			return nil
+		case ';':
+			value := &NodeRune{Content: ""}
+			if strings.HasPrefix(n.Token, ".") {
+				p.Lexer.Global[n.Token[1:]] = value
+				return nil
+			}
 
-		if r == ' ' {
+			p.Metadata[n.Token] = value
+			return nil
+		case ' ':
 			continue
+		default:
+			n.Token += string(r)
 		}
-
-		n.Token += string(r)
 	}
-	return nil
 }
 
 func (n *NodeMetadata) String(p *Page, content NodeInterface, args ...string) string {
@@ -56,7 +63,7 @@ func (n *NodeMetadata) Detect(p *Page) (bool, error) {
 	if err == io.EOF {
 		return false, nil
 	} else if err != nil {
-		panic(err)
+		p.Err(err)
 	}
 
 	if r == '#' {

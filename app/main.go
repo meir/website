@@ -43,7 +43,8 @@ func main() {
 		content := page.String(page, nil)
 		p := path.Join(*output, filepath)
 		os.MkdirAll(p, 0755)
-		fmt.Printf("----- %s ------\n%s\n====================\n", path.Join(p, "index.html"), content)
+		// fmt.Printf("----- %s ------\n%s\n====================\n", path.Join(p, "index.html"), content)
+		fmt.Printf("Writing %s to %s\n", page.Src, path.Join(p, "index.html"))
 		err := os.WriteFile(
 			path.Join(p, "index.html"),
 			[]byte(content),

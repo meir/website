@@ -4,20 +4,20 @@ type NodeRune struct {
 	Content string
 }
 
-func ScanContent(n NodeInterface, p *Page) ([]NodeInterface, bool, error) {
+func ScanContent(n NodeInterface, p *Page) (NodeInterface, error) {
 	nodes := []NodeInterface{}
 
 	for _, node := range n.InternalNodes() {
 		if ok, err := node.Detect(p); err != nil {
-			panic(err)
+			p.Err(err)
 		} else if ok {
 			nodes = append(nodes, node)
 			node.Process(p)
-			break
+			return node, nil
 		}
 	}
 
-	return nodes, len(nodes) > 0, nil
+	return nil, nil
 }
 
 func (n *NodeRune) InternalNodes() []NodeInterface {
@@ -27,7 +27,7 @@ func (n *NodeRune) InternalNodes() []NodeInterface {
 func (n *NodeRune) Process(p *Page) error {
 	r, _, err := p.Reader.ReadRune()
 	if err != nil {
-		panic(err)
+		p.Err(err)
 	}
 
 	n.Content += string(r)

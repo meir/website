@@ -23,18 +23,18 @@ func (n *NodeRaw) InternalNodes() []NodeInterface {
 
 func (n *NodeRaw) Process(p *Page) error {
 	for {
-		nodes, new, err := ScanContent(n, p)
+		node, err := ScanContent(n, p)
 		if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
-		if new {
+		if node != nil {
 			runeNode := NodeRune{
 				Content: string(n.Content),
 			}
 			n.Nodes = append(n.Nodes, &runeNode)
 			n.Content = ""
-			n.Nodes = append(n.Nodes, nodes...)
+			n.Nodes = append(n.Nodes, node)
 			continue
 		}
 
@@ -43,21 +43,20 @@ func (n *NodeRaw) Process(p *Page) error {
 			n.Nodes = append(n.Nodes, &NodeRune{
 				Content: string(n.Content),
 			})
-			break
+			return nil
 		} else if err != nil {
-			panic(err)
+			p.Err(err)
 		}
 
 		if !n.Root && r == '}' {
 			n.Nodes = append(n.Nodes, &NodeRune{
 				Content: string(n.Content),
 			})
-			break
+			return nil
 		}
 
 		n.Content += string(r)
 	}
-	return nil
 }
 
 func (n *NodeRaw) String(p *Page, content NodeInterface, args ...string) string {
@@ -72,7 +71,7 @@ func (n *NodeRaw) String(p *Page, content NodeInterface, args ...string) string 
 func (n *NodeRaw) Detect(p *Page) (bool, error) {
 	r, _, err := p.Reader.ReadRune()
 	if err != nil && err.Error() != "EOF" {
-		panic(err)
+		p.Err(err)
 	}
 
 	if r == ':' {

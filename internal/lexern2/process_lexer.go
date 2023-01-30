@@ -18,7 +18,7 @@ func (l *Lexer) LoadFile(options FileProcessOptions) {
 		Alias:    options.File,
 		Src:      options.File,
 		Metadata: map[string]NodeInterface{},
-		Reader:   *strings.NewReader(string(content)),
+		Reader:   NewReader(string(content)),
 	}
 	l.Pages = append(l.Pages, page)
 }
