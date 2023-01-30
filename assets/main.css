@@ -134,7 +134,7 @@ tbody tr:first-child {
     border-top: none;
 }
 
-tbody tr {
+tbody tr td {
     border-top: 1px solid black;
 }
 
