@@ -50,11 +50,6 @@ func (n *NodeInsert) String(p *Page, content NodeInterface, args ...string) stri
 	} else if value, ok := p.Metadata[n.token]; ok {
 		return value.String(p, content)
 	} else if sp := p.Lexer.GetPage(path.Dir(p.Src), n.token); sp != nil {
-
-		for key, data := range p.Metadata {
-			sp.Metadata[key] = data
-		}
-
 		if data, ok := sp.Metadata[n.token_name]; ok {
 			return data.String(p, content)
 		}
