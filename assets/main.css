@@ -173,4 +173,16 @@ tr td:last-child {
         filter: invert(1);
         background: black;
     }
+
+    td {
+        border-top: 1px solid white;
+    }
+
+    tr td {
+        border-left: 1px solid white;
+    }
+
+    footer ul {
+        border-top: 1px solid white;
+    }
 }
