@@ -130,11 +130,11 @@ thead {
     font-weight: bold;
 }
 
-tr:first-child {
+tbody tr:first-child {
     border-top: none;
 }
 
-tr {
+tbody tr {
     border-top: 1px solid black;
 }
 
