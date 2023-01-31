@@ -13,6 +13,7 @@ type NodeRaw struct {
 
 func (n *NodeRaw) InternalNodes() []NodeInterface {
 	return []NodeInterface{
+		&NodeScript{},
 		&NodeEscape{},
 		&NodeString{},
 		&NodeMetadata{},
