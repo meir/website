@@ -55,10 +55,6 @@ func (n *NodeTag) String(p *Page, content NodeInterface, args ...string) string 
 		p.Err(errors.New("Page not found: " + n.Token))
 	}
 
-	for key, data := range p.Metadata {
-		page.Metadata[key] = data
-	}
-
 	return page.String(p, n.Content, args...)
 }
 
