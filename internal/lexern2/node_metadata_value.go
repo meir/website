@@ -31,7 +31,7 @@ func (n *NodeMetadataValue) Process(p *Page) error {
 			continue
 		}
 
-		r, _, err := p.Reader.ReadRune()
+		r, err := p.Reader.ReadRune()
 		if err != nil {
 			p.Err(err)
 		}

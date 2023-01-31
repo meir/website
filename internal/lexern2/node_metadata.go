@@ -15,8 +15,10 @@ func (n *NodeMetadata) InternalNodes() []NodeInterface {
 
 func (n *NodeMetadata) Process(p *Page) error {
 	for {
-		r, _, err := p.Reader.ReadRune()
-		if err != nil {
+		r, err := p.Reader.ReadRune()
+		if err == io.EOF {
+			return nil
+		} else if err != nil {
 			p.Err(err)
 		}
 
@@ -59,7 +61,7 @@ func (n *NodeMetadata) String(p *Page, content NodeInterface, args ...string) st
 }
 
 func (n *NodeMetadata) Detect(p *Page) (bool, error) {
-	r, _, err := p.Reader.ReadRune()
+	r, err := p.Reader.ReadRune()
 	if err == io.EOF {
 		return false, nil
 	} else if err != nil {

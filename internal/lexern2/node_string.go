@@ -31,7 +31,7 @@ func (n *NodeString) Process(p *Page) error {
 			continue
 		}
 
-		r, _, err := p.Reader.ReadRune()
+		r, err := p.Reader.ReadRune()
 		if err == io.EOF {
 			return nil
 		} else if err != nil {
@@ -55,7 +55,7 @@ func (n *NodeString) String(p *Page, content NodeInterface, args ...string) stri
 }
 
 func (n *NodeString) Detect(p *Page) (bool, error) {
-	r, _, err := p.Reader.ReadRune()
+	r, err := p.Reader.ReadRune()
 	if err == io.EOF {
 		return false, nil
 	} else if err != nil {

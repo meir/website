@@ -12,7 +12,7 @@ func (n *NodeScript) InternalNodes() []NodeInterface {
 
 func (n *NodeScript) Process(p *Page) error {
 	for {
-		r, _, err := p.Reader.ReadRune()
+		r, err := p.Reader.ReadRune()
 		if err != nil {
 			p.Err(err)
 		}
@@ -24,7 +24,7 @@ func (n *NodeScript) Process(p *Page) error {
 			tag := "/script>"
 			n.Content += "<"
 			for i := 0; i < len(tag); i++ {
-				r, _, err := p.Reader.ReadRune()
+				r, err := p.Reader.ReadRune()
 				if err != nil && err != io.EOF {
 					return err
 				}
@@ -51,30 +51,18 @@ func (n *NodeScript) String(p *Page, content NodeInterface, args ...string) stri
 }
 
 func (n *NodeScript) Detect(p *Page) (bool, error) {
-	tag := "<script"
-	read := 0
-	for i := 0; i < len(tag); i++ {
-		r, _, err := p.Reader.ReadRune()
+	tag := []rune("<script")
+	for index, tag_rune := range tag {
+		r, err := p.Reader.Peek(index)
 		if err != nil && err != io.EOF {
-			return false, err
+			p.Err(err)
 		}
 
-		if err != io.EOF {
-			read++
-		}
-
-		if r != rune(tag[i]) {
-			//unread
-			for i := read; i > 0; i-- {
-				err := p.Reader.UnreadByte()
-				if err != nil {
-					return false, err
-				}
-			}
+		if r != tag_rune {
 			return false, nil
 		}
 	}
 
-	n.Content = tag
+	n.Content = string(tag)
 	return true, nil
 }

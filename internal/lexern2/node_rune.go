@@ -25,7 +25,7 @@ func (n *NodeRune) InternalNodes() []NodeInterface {
 }
 
 func (n *NodeRune) Process(p *Page) error {
-	r, _, err := p.Reader.ReadRune()
+	r, err := p.Reader.ReadRune()
 	if err != nil {
 		p.Err(err)
 	}

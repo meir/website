@@ -39,7 +39,7 @@ func (n *NodeRaw) Process(p *Page) error {
 			continue
 		}
 
-		r, _, err := p.Reader.ReadRune()
+		r, err := p.Reader.ReadRune()
 		if err == io.EOF {
 			n.Nodes = append(n.Nodes, &NodeRune{
 				Content: string(n.Content),
@@ -70,7 +70,7 @@ func (n *NodeRaw) String(p *Page, content NodeInterface, args ...string) string 
 }
 
 func (n *NodeRaw) Detect(p *Page) (bool, error) {
-	r, _, err := p.Reader.ReadRune()
+	r, err := p.Reader.ReadRune()
 	if err != nil && err.Error() != "EOF" {
 		p.Err(err)
 	}

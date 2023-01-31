@@ -2,7 +2,6 @@ package lexern2
 
 import (
 	"fmt"
-	"os"
 )
 
 func (p *Page) Process() {
@@ -21,6 +20,6 @@ func (p *Page) String(_p *Page, content NodeInterface, args ...string) string {
 
 func (p *Page) Err(err error) {
 	line, char := p.Reader.Line, p.Reader.Char
-	fmt.Printf("%s:%d:%d: %s", p.Src, line, char, err.Error())
-	os.Exit(1)
+	fmt.Printf("%s:%d:%d: %s\n", p.Src, line, char, err.Error())
+	panic(err)
 }

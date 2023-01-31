@@ -18,8 +18,10 @@ func (n *NodeInsert) InternalNodes() []NodeInterface {
 func (n *NodeInsert) Process(p *Page) error {
 	token_name := false
 	for {
-		r, _, err := p.Reader.ReadRune()
-		if err != nil {
+		r, err := p.Reader.ReadRune()
+		if err == io.EOF {
+			return nil
+		} else if err != nil {
 			p.Err(err)
 		}
 
@@ -67,7 +69,7 @@ func (n *NodeInsert) String(p *Page, content NodeInterface, args ...string) stri
 }
 
 func (n *NodeInsert) Detect(p *Page) (bool, error) {
-	r, _, err := p.Reader.ReadRune()
+	r, err := p.Reader.ReadRune()
 	if err == io.EOF {
 		return false, nil
 	} else if err != nil {

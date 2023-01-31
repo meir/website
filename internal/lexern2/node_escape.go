@@ -11,7 +11,7 @@ func (n *NodeEscape) InternalNodes() []NodeInterface {
 }
 
 func (n *NodeEscape) Process(p *Page) error {
-	r, _, err := p.Reader.ReadRune()
+	r, err := p.Reader.ReadRune()
 	if err != nil {
 		p.Err(err)
 	}
@@ -25,7 +25,7 @@ func (n *NodeEscape) String(p *Page, content NodeInterface, args ...string) stri
 }
 
 func (n *NodeEscape) Detect(p *Page) (bool, error) {
-	r, _, err := p.Reader.ReadRune()
+	r, err := p.Reader.ReadRune()
 	if err == io.EOF {
 		return false, nil
 	} else if err != nil {
