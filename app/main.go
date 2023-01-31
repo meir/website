@@ -24,8 +24,9 @@ func main() {
 
 	lexer.SetGlobal("build_date", time.Now().Format("2006-01-02 15:04:05"))
 	lexer.SetGlobal("year", time.Now().Format("2006"))
-	lexer.SetGlobal("version", "0.0.1")
+	lexer.SetGlobal("date", time.Now().Format("2006-01-02"))
 	lexer.SetGlobal("time", time.Now().Format("15:04:05"))
+	lexer.SetGlobal("version", "0.0.2")
 	lexer.SetGlobal("go_version", runtime.Version())
 	lexer.SetGlobal("go_os", runtime.GOOS)
 	lexer.SetGlobal("go_arch", runtime.GOARCH)

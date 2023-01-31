@@ -18,6 +18,7 @@ func (n *NodeRaw) InternalNodes() []NodeInterface {
 		&NodeString{},
 		&NodeMetadata{},
 		&NodeInsert{},
+		&NodeEach{},
 		&NodeTag{},
 	}
 }

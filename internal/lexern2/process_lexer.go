@@ -48,7 +48,7 @@ func (l *Lexer) GetByMetaKey(key string) []*Page {
 func (l *Lexer) GetByMetaValue(key string, value string) []*Page {
 	pages := []*Page{}
 	for _, page := range l.Pages {
-		if page.Metadata[key].String(page, nil) == value {
+		if _, ok := page.Metadata[key]; ok && page.Metadata[key].String(page, nil) == value {
 			pages = append(pages, page)
 		}
 	}

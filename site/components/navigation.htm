@@ -8,41 +8,34 @@
             Projects
         </summary>
         <ul class="simple">
-            <li>
-                <a href="+$/pages/projects/macropad.htm:url;">Macropad</a>
-            </li>
-            <li>
-                <a href="+$/pages/projects/lexer.htm:url;">Static Lexer</a>
-            </li>
+            {each tag=project:
+                <li>
+                    <a href="+url;">+title;</a>
+                </li>
+            }
         </ul>
     </details>
     <details open>
         <summary>Keyboards</summary>
         <ul class="simple">
-            <li>
-                <a href="+$/pages/keyboards/my_stuff.htm:url;">My Stuff</a>
-            </li>
-            <li>
-                <a href="+$/pages/keyboards/discipline_botanical.htm:url;">Discipline \+ GMK Botanical</a>
-            </li>
-            <li>
-                <a href="+$/pages/keyboards/planck_bento.htm:url;">OLKB Planck \+ GMK Bentō</a>
-            </li>
-            <li>
-                <a href="+$/pages/keyboards/rhymestone_gateway.htm:url;">Rhymestone \+ GMK Gateway</a>
-            </li>
-            <li>
-                <a href="+$/pages/keyboards/apricot_bliss.htm:url;">Apricot \+ SA Bliss</a>
-            </li>
+            {each tag=keyboards:
+                <li>
+                    <a href="+url;">+title;</a>
+                </li>
+            }
         </ul>
     </details>
-    <a href="+$/pages/setup/setup.htm:url;">Setup Pictures</a>
     <details open>
         <summary>Music</summary>
         <ul class="simple">
-            <li>
-                <a href="+$/pages/music/sweelinck.htm:url;">Sweelinck</a>
-            </li>
+            {each tag=music:
+                <li>
+                    <a href="+url;">+title;</a>
+                </li>
+            }
         </ul>
     </details>
+    {each tag=none:
+        <a href="+url;">+title;</a>
+    }
 </nav>
