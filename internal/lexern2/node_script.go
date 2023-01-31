@@ -62,7 +62,5 @@ func (n *NodeScript) Detect(p *Page) (bool, error) {
 			return false, nil
 		}
 	}
-
-	n.Content = string(tag)
 	return true, nil
 }
