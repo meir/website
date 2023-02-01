@@ -17,9 +17,6 @@ jobs:
         with:
           go-version: '^1.19.2'
 
-      - run: apt-get update
-      - run: apt-get install libwebp-dev
-
       - name: Build src
         run: go run ./app/main.go -i ./site -o ./build
       - run: echo "yesimhuman.dev" > ./build/CNAME
