@@ -1,6 +1,8 @@
 
 #alias = template;
 
+#domain = yesimhuman.dev;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Hi, i'm Human, this is my small blog where i post random stuff that im interested in and get excited about! Feel welcome, take a look and get some inspiration? Who knows!">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src '+domain;'; script-src '+domain;'; img-src '+domain;'">
     <title>+title;</title>
     <link rel="stylesheet" href="/assets/main.css">
     <link lazyload rel="stylesheet" href="/assets/atom-one-dark.min.css">
