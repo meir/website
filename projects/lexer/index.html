@@ -84,16 +84,16 @@
                         <pre>
     <code class="language-html">
         +url = /;
-                                {code:
-                                    +.lang=go;
-                                    `
-                                        package main
-                                
-                                        func main() {
-                                            println("hello world!")
-                                        }
-                                    `
-                                }
+{code:
+    +.lang=go;
+    `
+        package main
+
+        func main() {
+            println("hello world!")
+        }
+    `
+}
     </code>
 </pre>
                     </p>
@@ -106,8 +106,8 @@
                         <pre>
     <code class="language-html">
         +local_data;
-                                +global_data;
-                                +$/data.htm:file_data;
++global_data;
++$/data.htm:file_data;
     </code>
 </pre>
                     </p>
@@ -125,12 +125,12 @@
                         <pre>
     <code class="language-html">
         {$/components/without_content.htm}
-                                {$/components/with_content.htm:
-                                    <div>
-                                        hello!
-                                    </div>
-                                }
-                                {./relative_path.htm}
+{$/components/with_content.htm:
+    <div>
+        hello!
+    </div>
+}
+{./relative_path.htm}
     </code>
 </pre>
                     </p>
@@ -155,11 +155,11 @@
                         <pre>
     <code class="language-html">
         {$component.htm:
-                                    ` 
-                                          this is where the indentation starts.
-                                          marked by the horizontal line above right after the string opening on the same line.
-                                    `
-                                }
+    ` 
+          this is where the indentation starts.
+          marked by the horizontal line above right after the string opening on the same line.
+    `
+}
     </code>
 </pre>
                     </p>
@@ -200,12 +200,88 @@
         So far syntactically the lexer hasnt changed much, the biggest change is that metadata uses the <code>#</code> token instead of <code>+</code> to save metadata.
         <code>+</code> is only used to insert metadata to the current file.
     </p>
+    <h3>Some examples</h3>
+    <p>
+        <details>
+            <summary>Navigation</summary>
+            <pre>
+    <code class="language-html">
+        <nav>
+    <a href="/">
+        <b>Home</b>
+    </a>
+    <details open>
+        <summary>
+            Projects
+        </summary>
+        <ul class="simple">
+            {each tag=project:
+                <li>
+                    <a href="+url;">+title;</a>
+                </li>
+            }
+        </ul>
+    </details>
+    <details open>
+        <summary>Keyboards</summary>
+        <ul class="simple">
+            {each tag=keyboards:
+                <li>
+                    <a href="+url;">+title;</a>
+                </li>
+            }
+        </ul>
+    </details>
+</nav>
+    </code>
+</pre>
+        </details>
+        <details>
+            <summary>Pages</summary>
+            <pre>
+    <code class="language-html">
+        #url=/projects/lexer;
+#title=Lexer;
+#tag=project;
+
+{template:
+    <h2>Static Lexer</h2>
+    <p>...</p>
+}
+    </code>
+</pre>
+        </details>
+        <details>
+            <summary>Template</summary>
+            <pre>
+    <code class="language-html">
+        #alias = code;
+
+<pre>
+    <code class="language-+lang;">
+        +content;
+    </code>
+</pre>
+    </code>
+</pre>
+            <pre>
+    <code class="language-html">
+        {code:
+    #.lang=html;
+    `
+        this is a code block
+    `
+}
+    </code>
+</pre>
+        </details>
+    </p>
         </main>
     </div>
     <footer>
     <ul>
         <li>
-            Last build: <code>2023-02-01 08:00:37</code>
+            Last build: <code>2023-02-01 09:29:01</code>
         </li>
         <li>
             go1.19.5
