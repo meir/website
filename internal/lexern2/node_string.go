@@ -1,6 +1,9 @@
 package lexern2
 
-import "io"
+import (
+	"io"
+	"strings"
+)
 
 type NodeString struct {
 	Content    string
@@ -23,7 +26,7 @@ func (n *NodeString) Process(p *Page) error {
 
 		if node != nil {
 			runeNode := NodeRune{
-				Content: string(n.Content),
+				Content: strings.TrimSpace(n.Content),
 			}
 			n.Nodes = append(n.Nodes, &runeNode)
 			n.Content = ""
