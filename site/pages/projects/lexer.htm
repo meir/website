@@ -21,7 +21,7 @@
                         This means global metadata can be used to pass arguments to other files such as this: 
                         {code:
                             #.lang=html;
-                            `
+`
 +url = /;
 {code:
     +.lang=go;
@@ -34,7 +34,7 @@
     \`
 }
                             
-                            `
+`
                         }
                     </p>
                     <p>
@@ -45,11 +45,11 @@
                         Metadata can be retrieved as followed:
                         {code:
                             #.lang=html;
-                            `
+`
 +local_data;
 +global_data;
 +$/data.htm:file_data;
-                            `
+`
                         }
                     </p>
                 </details>
@@ -65,7 +65,7 @@
                         Files can be included as followed:
                         {code:
                             #.lang=html;
-                            `
+`
 {$/components/without_content.htm}
 {$/components/with_content.htm:
     <div>
@@ -73,7 +73,7 @@
     </div>
 }
 {./relative_path.htm}
-                            `
+`
                         }
                     </p>
                 </details>
@@ -96,14 +96,14 @@
                         String indentations can be made as followed:
                         {code:
                             #.lang=html;
-                            `
+`
 {$component.htm:
     \` 
           this is where the indentation starts.
           marked by the horizontal line above right after the string opening on the same line.
     \`
 }
-                            `
+`
                         }
                     </p>
                 </details>
@@ -149,7 +149,7 @@
             <summary>Navigation</summary>
             {code:
                 #.lang=html;
-                `
+`
 
 <nav>
     <a href="/">
@@ -185,7 +185,7 @@
             <summary>Pages</summary>
             {code:
                 #.lang=html;
-                `
+`
 
 #url=/projects/lexer;
 #title=Lexer;
@@ -202,7 +202,7 @@
             <summary>Template</summary>
             {code:
                 #.lang=html;
-                `
+`
 
 #alias = code;
 
@@ -215,7 +215,7 @@
             }
             {code:
                 #.lang=html;
-                `
+`
 
 {code:
     #.lang=html;
@@ -223,7 +223,7 @@
         this is a code block
     \`
 }
-                `
+`
             }
         </details>
     </p>
