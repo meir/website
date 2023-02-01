@@ -112,7 +112,7 @@
     <footer>
     <ul>
         <li>
-            Last build: <code>2023-02-01 07:47:01</code>
+            Last build: <code>2023-02-01 08:00:37</code>
         </li>
         <li>
             go1.19.5
@@ -127,6 +127,14 @@
 </footer>
     <script async>
         window.addEventListener('load', () => {
+            document.querySelectorAll("code").forEach(function(element) {
+                element.innerHTML = element.innerHTML.
+                    replace(/&/g, "&amp;").
+                    replace(/</g, "&lt;").
+                    replace(/>/g, "&gt;").
+                    replace(/"/g, "&quot;").
+                    replace(/'/g, "&");
+            });
             hljs.highlightAll();
         })
     </script>
