@@ -22,17 +22,17 @@
                         {code:
                             #.lang=html;
                             `
-                                +url = /;
-                                {code:
-                                    +.lang=go;
-                                    \`
-                                        package main
-                                
-                                        func main() {
-                                            println("hello world!")
-                                        }
-                                    \`
-                                }
++url = /;
+{code:
+    +.lang=go;
+    \`
+        package main
+
+        func main() {
+            println("hello world!")
+        }
+    \`
+}
                             
                             `
                         }
@@ -46,9 +46,9 @@
                         {code:
                             #.lang=html;
                             `
-                                +local_data;
-                                +global_data;
-                                +$/data.htm:file_data;
++local_data;
++global_data;
++$/data.htm:file_data;
                             `
                         }
                     </p>
@@ -66,13 +66,13 @@
                         {code:
                             #.lang=html;
                             `
-                                {$/components/without_content.htm}
-                                {$/components/with_content.htm:
-                                    <div>
-                                        hello!
-                                    </div>
-                                }
-                                {./relative_path.htm}
+{$/components/without_content.htm}
+{$/components/with_content.htm:
+    <div>
+        hello!
+    </div>
+}
+{./relative_path.htm}
                             `
                         }
                     </p>
@@ -97,12 +97,12 @@
                         {code:
                             #.lang=html;
                             `
-                                {$component.htm:
-                                    \` 
-                                          this is where the indentation starts.
-                                          marked by the horizontal line above right after the string opening on the same line.
-                                    \`
-                                }
+{$component.htm:
+    \` 
+          this is where the indentation starts.
+          marked by the horizontal line above right after the string opening on the same line.
+    \`
+}
                             `
                         }
                     </p>
@@ -142,5 +142,85 @@
         The second goal is to make the lexer logging more useful to find issues, i want to make it so that it logs the line and column of the error.
         So far syntactically the lexer hasnt changed much, the biggest change is that metadata uses the <code>`#`</code> token instead of <code>`+`</code> to save metadata.
         <code>`+`</code> is only used to insert metadata to the current file.
+    </p>
+    <h3>Some examples</h3>
+    <p>
+        <details>
+            <summary>Navigation</summary>
+            {code:
+                #.lang=html;
+                `
+<nav>
+    <a href="/">
+        <b>Home</b>
+    </a>
+    <details open>
+        <summary>
+            Projects
+        </summary>
+        <ul class="simple">
+            {each tag=project:
+                <li>
+                    <a href="+url;">+title;</a>
+                </li>
+            }
+        </ul>
+    </details>
+    <details open>
+        <summary>Keyboards</summary>
+        <ul class="simple">
+            {each tag=keyboards:
+                <li>
+                    <a href="+url;">+title;</a>
+                </li>
+            }
+        </ul>
+    </details>
+</nav>
+`
+            }
+        </details>
+        <details>
+            <summary>Pages</summary>
+            {code:
+                #.lang=html;
+                `
+#url=/projects/lexer;
+#title=Lexer;
+#tag=project;
+
+{template:
+    <h2>Static Lexer</h2>
+    <p>...</p>
+}
+`
+            }
+        </details>
+        <details>
+            <summary>Template</summary>
+            {code:
+                #.lang=html;
+                `
+#alias = code;
+
+<pre>
+    <code class=\"language-+lang;\">
+        +content;
+    </code>
+</pre>
+`
+            }
+            {code:
+                #.lang=html;
+                `
+{code:
+    #.lang=html;
+    \`
+        this is a code block
+    \`
+}
+                `
+            }
+        </details>
     </p>
 }
