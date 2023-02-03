@@ -9,6 +9,16 @@ html, body {
     line-height: 1.2;
 }
 
+#welcome {
+    border-bottom: 1px solid black;
+    padding: 1rem;
+    padding-bottom: 0px;
+}
+
+#welcome img {
+    height: 200px;
+}
+
 nav > a {
     padding-bottom: 1rem;
     display: flex;
