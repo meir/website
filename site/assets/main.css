@@ -11,12 +11,13 @@ html, body {
 
 #welcome {
     border-bottom: 1px solid black;
-    padding: 1rem;
-    padding-bottom: 0px;
+    padding-left: 4rem;
+    line-height: 0;
 }
 
 #welcome img {
-    height: 200px;
+    height: 125px;
+    width: auto;
 }
 
 nav > a {
