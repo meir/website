@@ -44,6 +44,11 @@ summary {
 
 details[open] {
     padding-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+nav details {
+    padding-left: 0;
 }
 
 header {
