@@ -44,10 +44,13 @@ summary {
 
 details[open] {
     padding-bottom: 1rem;
+}
+
+details {
     padding-left: 1rem;
 }
 
-nav details {
+nav > details {
     padding-left: 0;
 }
 
