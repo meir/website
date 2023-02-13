@@ -96,7 +96,7 @@
                         This means global metadata can be used to pass arguments to other files such as this: 
                         <pre>
     <code class="language-html">
-        +url = /;
++url = /;
 {code:
     +.lang=go;`package main
 
@@ -115,7 +115,7 @@
                         Metadata can be retrieved as followed:
                         <pre>
     <code class="language-html">
-        +local_data;
++local_data;
 +global_data;
 +$/data.htm:file_data;
     </code>
@@ -134,7 +134,7 @@
                         Files can be included as followed:
                         <pre>
     <code class="language-html">
-        {$/components/without_content.htm}
+{$/components/without_content.htm}
 {$/components/with_content.htm:
     <div>
         hello!
@@ -164,7 +164,7 @@
                         String indentations can be made as followed:
                         <pre>
     <code class="language-html">
-        {$component.htm:`this is where the indentation starts.
+{$component.htm:`this is where the indentation starts.
           marked by the horizontal line above right after the string opening on the same line.`
 }
     </code>
@@ -213,7 +213,7 @@
             <summary>Navigation</summary>
             <pre>
     <code class="language-html">
-        <nav>
+<nav>
     <a href="/">
         <b>Home</b>
     </a>
@@ -247,7 +247,7 @@
             <summary>Pages</summary>
             <pre>
     <code class="language-html">
-        #url=/projects/lexer;
+#url=/projects/lexer;
 #title=Lexer;
 #tag=project;
 
@@ -262,7 +262,7 @@
             <summary>Template</summary>
             <pre>
     <code class="language-html">
-        #alias = code;
+#alias = code;
 
 <pre>
     <code class="language-+lang;">
@@ -273,7 +273,7 @@
 </pre>
             <pre>
     <code class="language-html">
-        {code:
+{code:
     #.lang=html;`this is a code block`
 }
     </code>
@@ -285,7 +285,7 @@
     <footer>
     <ul>
         <li>
-            Last build: <code>2023-02-13 08:36:19</code>
+            Last build: <code>2023-02-13 10:44:53</code>
         </li>
         <li>
             go1.19.5
