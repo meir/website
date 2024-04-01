@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Hi, i'm Human, this is my small blog where i post random stuff that im interested in and get excited about! Feel welcome, take a look and get some inspiration? Who knows!">
     <meta http-equiv="Content-Security-Policy" content="default-src yesimhuman.dev; script-src yesimhuman.dev 'unsafe-inline'; img-src yesimhuman.dev avatars.githubusercontent.com; style-src yesimhuman.dev; media-src yesimhuman.dev">
-    <title>Lazy Designers' Apricot + SA Bliss</title>
+    <title>Mako</title>
     <link rel="stylesheet" href="/assets/main.css">
     <link lazyload rel="stylesheet" href="/assets/atom-one-dark.min.css">
     <script async src="/assets/highlight.min.js"></script>
@@ -37,6 +37,8 @@
                     <a href="/projects/lexer">Lexer</a>
                 </li><li>
                     <a href="/projects/macropad">Macropad</a>
+                </li><li>
+                    <a href="/projects/mako">Mako</a>
                 </li>
         </ul>
     </details>
@@ -44,7 +46,7 @@
         <summary>Keyboards</summary>
         <ul class="simple">
             <li>
-                    <a href="/keyboards/apricot_bliss">Lazy Designers' Apricot + SA Bliss</a>
+                    <a href="/keyboards/apricot_nightsakura">Lazy Designers' Apricot + JTK Night Sakura</a>
                 </li><li>
                     <a href="/keyboards/discipline_botanical">CFTKB Discipline + GMK Botanical 2</a>
                 </li><li>
@@ -87,6 +89,8 @@
         <ul class="simple">
             <li>
                     <a href="/music/sweelinck">Sweelinck</a>
+                </li><li>
+                    <a href="/music/sweelinck/25-07-2023">Sweelinck Update 25-07-2023</a>
                 </li>
         </ul>
     </details>
@@ -94,53 +98,40 @@
     <a href="https://social.flamingo.dev">Socials</a>
 </nav>
         <main>
-            <h1>Lazy Designers' Apricot + SA Bliss</h1>
+            <h1>Mako</h1>
     <p>
-        This is a keyboard im planning on getting, the group buy for round 2 has not started yet so im waiting on it still.
-        It is planned to run at the end of February 2023.
-        
-        I do have the keycaps ready in a bag waiting to be mounted, im thinking of combining these with some Gazzew Bobagums.
-        Still need to get some lube for the stabilizers and actually get some cool stabilizers.
+        I'm working on a small discord bot.
+        It's a fun little project i made to learn a little bit about the new discord api aswell as Machine Learning.
+        The bot i'm working on has a text classifier that will try and guess if your message is a bit sour.
+        The reason i'm making this is so that it can detect when somebody is talking about suicide or depressive topics for example.
+        If it detects this, it will send some self help links and resources such as a suicide prevention hotline or other stuff.
+        One thing i want to add aswell is server rules, so for example if a server owner wants to ban toxic behaviour or threats, the bot can detect that and remove those certain messages.
+        Only thing im slightly stuck on is adding enough data to teach the bot well enough.
     </p>
+    <h3>
+        Technologies
+    </h3>
     <p>
-        I'll update this post later once i've finally received the keyboard which will be around March i believe.
+        The technologies ive chosen to use for this bot is MongoDB and Golang.
+        I absolutely love this combination since Golang is still a typed language, so your database structure is in the code instead of the database.
+        And the thing i love the most about MongoDB is that i dont need to have a volume or a bucket to save the model data in.
+        MongoDB has a feature called GridFS. this splits a file into blocks of a certain size and saves files in that format.
+        Its easy to save and retreat files this way and its less expensive than having an additional storage solution next to it.
     </p>
-    <h2>Small update 20-02-2023</h2>
+    <h3>Adding the bot</h3>
     <p>
-        The groupbuy for the keyboard ended and the keyboard has been paid for.
-        Im really excited for it to arrive and im pretty sure im going to love it.
-        I still have to get a keymap ready but i need to see what my preferences are first for QAZ keyboards.
-    </p>
-    <p>
-        In total, this keyboard is comprised of the following components:
-        <ul>
-            <li>
-                SA Bliss - Pink Alphas
-                [<a href="https://mykeyboard.eu/catalogue/sa-sculpted-bliss-pink-alphas_2706/">link</a>]
-            </li>
-            <li>
-                SA Bliss - Pink Modifiers
-                [<a href="https://mykeyboard.eu/catalogue/sa-sculpted-bliss-pink-modifiers_2709/">link</a>]
-            </li>
-            <li>
-                Gazzew Bobagum
-                [<a href="https://splitkb.com/products/gazzew-bobagum-silent-linear-switch">link</a>]
-            </li>
-            <li>
-                Lazydesigners' Apricot
-                [<a href="http://lazydesigners.cn/apricotgb/">link</a>]
-            </li>
-        </ul>
+        At the moment the bot is still in development, i want to clean the bot a little up, make the commands a bit easier to use and add a bit more data to the bot to learn off.
+        I'll update this page later when the bot is ready to be added to your server.
     </p>
         </main>
     </div>
     <footer>
     <ul>
         <li>
-            Last build: <code>2023-06-09 17:50:55</code>
+            Last build: <code>2023-07-25 09:58:50</code>
         </li>
         <li>
-            go1.20.4
+            go1.20.6
         </li>
         <li>
             linux
