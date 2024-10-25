@@ -12,5 +12,5 @@ done
 # run functions to build the site
 clean
 copy_assets
+prerender
 render_all_files
-

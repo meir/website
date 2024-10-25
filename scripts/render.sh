@@ -3,14 +3,14 @@
 
 # return the path without the src prefix
 get_path() {
-  path=$(echo $1 | sed "s|$SRC||")
+  local path=$(echo $1 | sed "s|$SRC||")
   echo $path
 }
 
 # return the name of the file without htm(l) extension
 get_name() {
-  name=$(basename $1)
-  name=$(echo $name | sed 's|\.htm||' | sed 's|\.html||')
+  local name=$(basename $1)
+  local name=$(echo $name | sed 's|\.htm||' | sed 's|\.html||')
   echo $name
 }
 
@@ -18,7 +18,7 @@ get_name() {
 # example: ./src/topics/keyboards.htm > ./site/topics/keyboards/index.htm
 # this makes it so that the user can go to /topics/keyboards instead of /topics/keyboards.htm
 get_output() {
-  path=$(get_path $1)
+  local path=$(get_path $1)
   # if the file is already named index we dont have to make an index dir
   if [ "$(get_name $1)" == "index" ]; then
     path=$(dirname $path)
@@ -32,8 +32,8 @@ get_output() {
 
 # render the content of the file
 render() {
-  file="$1"
-  content=$(eval "cat <<EOF
+  local file="$1"
+  local content=$(eval "cat <<EOF
 $(<$file)
 EOF")
   echo "$content"
@@ -41,10 +41,8 @@ EOF")
 
 # render all the files in the src dir and output them in the output dir
 render_all_files() {
-  files=$(find "$SRC" -type f ! -name ".htm(l)")
-
-  for file in $files; do
-    output=$(get_output "$file")
+  for file in $FILES; do
+    local output=$(get_output "$file")
     echo "Rendering $file to $output"
     render "$file" > "$output" 
   done

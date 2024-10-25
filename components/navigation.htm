@@ -1,6 +1,8 @@
 
 <navigation>
   <ul>
-    <li><a href="/">Home</a></li>
+    $(for page in $(get_tagged "keyboards"); do
+        component "navigation_link"
+      done)
   </ul>
 </navigation>
