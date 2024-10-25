@@ -1,6 +1,6 @@
 { pkgs }:
 pkgs.mkShell {
-  packages = [
+  packages = with pkgs; [
     python3
     jq
   ];
