@@ -33,9 +33,7 @@ get_output() {
 # render the content of the file
 render() {
   local file="$1"
-  local content=$(eval "cat <<EOF
-$(<$file)
-EOF")
+  local content=$(eval "cat <<< \"$(<$file)\"")
   echo "$content"
 }
 

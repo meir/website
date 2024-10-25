@@ -6,10 +6,7 @@ component() {
   content=""
 
   while IFS= read -r line; do
-    content=$(cat <<EOF
-$content
-$line
-EOF)
+    content+=$'\n'"$line"
   done
 
   render "./components/${file}.htm"
