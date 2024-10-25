@@ -13,4 +13,5 @@ done
 clean
 copy_assets
 prerender
+create_cname
 render_all_files
