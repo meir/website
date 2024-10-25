@@ -1,15 +1,9 @@
 #!/bin/bash
 
 prerender_hook "prerender_tags"
-prerendered=false
 
 prerender_tags() {
-  echo "Prerendering..."
   echo "{}" > $tmp/tags.json
-  for file in $FILES; do
-    _=$(render "$file")
-  done
-  prerendered=true
 }
 
 tag() {
