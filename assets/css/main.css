@@ -8,7 +8,7 @@
 }
 
 :root {
-  --bg: #131711;
+  --bg: #101A0B;
   --fg: #f7f4f3;
   --low: #131711;
   --high: #D1496B;
@@ -28,3 +28,10 @@ h1 {
   color: var(--fg);
 }
 
+footer {
+  background-color: var(--bg);
+  color: var(--fg);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
