@@ -30,10 +30,14 @@ get_output() {
   echo "${OUT}${path}index.htm"
 }
 
+
 # render the content of the file
 render() {
   local file="$1"
-  local content=$(eval "cat <<< \"$(<$file)\"")
+  local content=$(eval "cat <<EOD
+$(<$file)
+EOD
+")
   echo "$content"
 }
 
