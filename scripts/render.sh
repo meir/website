@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # return the path without the src prefix
 get_path() {
   local path=$(echo $1 | sed "s|$SRC||")

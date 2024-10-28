@@ -2,7 +2,13 @@
 <navigation>
   <ul>
     $(for page in ""; do #$(get_tagged "keyboards"); do
-        component "navigation_link"
+        cat <<EOF
+        <li>
+          <a href="$(get_url $page)">
+            $(get_title $page)
+          </a>
+        </li>
+EOF
       done)
   </ul>
 </navigation>
