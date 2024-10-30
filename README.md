@@ -4,7 +4,7 @@ This is a personal site made using a static site generator entirely written in b
 I would not suggest using this, unless you have a lot of confidence in bash and in me (I don't).
 
 Unless you want to use a screwdriver as a fork, I would not suggest bash as a static site generator, it works, but it's cursed.
-If you still do decide to use this, you're welcome to ask questions, but please do come to me with expectations to fix your scripts.
+If you still do decide to use this, you're welcome to ask questions, but please don't come to me with expectations to fix your scripts.
 
 ## Why make this in bash?
 Why not?
