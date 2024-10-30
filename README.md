@@ -102,3 +102,6 @@ EOF
 ```
 And not `EOF)`
 
+## License
+
+MIT
