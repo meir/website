@@ -8,3 +8,11 @@ copy_assets() {
     cp $file $OUT/assets
   done
 }
+
+find_assets() {
+  local type="$1"
+  local name="$2"
+
+  local files="$(find "$OUT/assets/" -type f ! -name "$type" | grep "$name")"
+  echo $files
+}

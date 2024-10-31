@@ -1,14 +1,6 @@
 
-<navigation>
+<nav>
   <ul>
-    $(for page in ""; do #$(get_tagged "keyboards"); do
-        cat <<EOF
-        <li>
-          <a href="$(get_url $page)">
-            $(get_title $page)
-          </a>
-        </li>
-EOF
-      done)
+    $(href="/" component "link" <<< "Home")
   </ul>
-</navigation>
+</nav>

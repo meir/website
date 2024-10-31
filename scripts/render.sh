@@ -45,6 +45,8 @@ render_all_files() {
   for file in $FILES; do
     local output=$(get_output "$file")
     echo "Rendering $file to $output"
+    url="$(dirname $output)"
+    url="${url##"$OUT"}/"
     render "$file" > "$output" 
   done
   
