@@ -32,7 +32,7 @@ get_output() {
 
 # render the content of the file
 render() {
-  local file="$1"
+  export file="$1"
   local content=$(eval "cat <<EOD
 $(<$file)
 EOD

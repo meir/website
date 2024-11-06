@@ -1,3 +1,16 @@
-${hi="hi"}
 
-o:$hi
+$(
+polaroids="$(ls $OUT/assets/*.jpg | grep "polaroid")"
+
+random_polaroid() {
+  rand=$((RANDOM % $(echo "$polaroids" | wc -l)))
+
+  polaroid=$(echo "$polaroids" | sed -n "${rand}p")
+
+  echo "${polaroid##$OUT}"
+}
+
+cat <<EOF
+<img src="$(random_polaroid)" alt="polaroid" class="polaroid">
+EOF
+)

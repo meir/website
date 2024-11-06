@@ -5,9 +5,11 @@ component() {
   file="$1"
   content=""
 
-  while IFS= read -r line; do
-    content+=$'\n'"$line"
-  done
+  if [ -p /dev/stdin ]; then
+    while IFS= read -r line; do
+      content+=$'\n'"$line"
+    done
+  fi
 
   render "./components/${file}.htm"
 }
