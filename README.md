@@ -32,11 +32,7 @@ Once you have direnv installed you just have to run `direnv allow` to automatica
 
 ## Developing
 
-It's quite easy, get a file watcher for your editor if you want and just let it run `./dev.sh`
-
-### NVIM
-For NVIM I suggest installing [Overseer](https://github.com/stevearc/overseer.nvim).
-Using this plugin you can start a job that will run `./dev.sh` and make it automatically watch all files for hot reload.
+It's quite easy, just run `./dev.sh`, this instantly includes hot reload and hosts the `$OUT` folder using ruby
 
 ## Files
 
