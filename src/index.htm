@@ -5,10 +5,11 @@ component "layout" <<EOF
 
 <h1 id="title">yes im human</h1>
 
-$(component "polaroid" <<< "About")
-$(component "polaroid" <<< "About")
-$(component "polaroid" <<< "About")
-$(component "polaroid" <<< "About")
+$(component "polaroid")
+$(component "polaroid")
+$(component "polaroid")
+
+$(category="general" component "giscus")
 
 EOF
 )

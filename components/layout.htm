@@ -2,10 +2,11 @@
   <head>
     <title>${title}</title>
     <link rel="stylesheet" href="/assets/main.css">
+    $(header_items)
   </head>
   <body>
     $(component "navigation")
-    ${content}
+    ${content:="No Content"}
 
     $(component "footer")
   </body>

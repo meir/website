@@ -15,21 +15,21 @@ tag() {
   fi
 
   local key=$1
-  local title=$title
+  local title=$(echo $title | jq -aRs .)
   local entry=$(cat <<EOF
 [{
-  "file": "$file",
+  "file": "$url",
   "title": "$title"
 }]
 EOF
 )
-  jq -c ".$key += $entry" <<< $(<$tmp/tags.json) > $tmp/tags.json
+  jq -c ".\"$key\" += $entry" <<< $(<$tmp/tags.json) > $tmp/tags.json
 }
 
 # get all the pages attached to a specific tag
 get_tagged() {
   local key=$1
-  local pages=$(jq -c ".$key[]" <<< $(<$tmp/tags.json))
+  local pages=$(jq -c ".\"$key\"[]" <<< $(<$tmp/tags.json))
   echo $pages
 }
 
@@ -47,6 +47,6 @@ get_title() {
   local page="$@"
 
   local title=$(echo "$page" | jq -r ".title")
-  echo $title
+  echo $title | jq -r
 }
 

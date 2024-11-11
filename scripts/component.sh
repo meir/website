@@ -5,7 +5,7 @@ component() {
   file="$1"
   content=""
 
-  if [ -p /dev/stdin ]; then
+  if [ -p /dev/stdin ] || [ ! -t 0 ]; then
     while IFS= read -r line; do
       content+=$'\n'"$line"
     done

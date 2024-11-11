@@ -9,16 +9,19 @@ prerender_hook() {
 prerendered=false
 
 prerender() {
-  echo "Prerendering..."
-  for file in $FILES; do
-    _=$(render "$file")
-  done
-
   echo "Running prerender hooks"
   for hook in "${hooks[@]}"; do
     echo "Running prerender hook: $hook"
     $hook
   done
   
+  echo "Prerendering..."
+  for file in $FILES; do
+    local output=$(get_output "$file")
+    url="$(dirname $output)"
+    url="${url##"$OUT"}/"
+    _=$(render "$file")
+  done
+ 
   prerendered=true
 }

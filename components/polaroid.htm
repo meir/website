@@ -5,7 +5,7 @@ polaroids="$(ls $OUT/assets/*.jpg | grep "polaroid")"
 random_polaroid() {
   rand=$((RANDOM % $(echo "$polaroids" | wc -l)))
 
-  polaroid=$(echo "$polaroids" | sed -n "${rand}p")
+  polaroid=$(echo "$polaroids" | sed '/^$/d' | sed -n "${rand}p")
 
   echo "${polaroid##$OUT}"
 }
