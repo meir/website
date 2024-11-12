@@ -11,5 +11,5 @@ component() {
     done
   fi
 
-  render "./components/${file}.htm"
+  render "${COMPONENTS}/${file}.htm"
 }

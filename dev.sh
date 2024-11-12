@@ -97,7 +97,7 @@ trap cleanup EXIT
 
 while true; do
   # Generate a new list of file modification times
-  new_list=$(find "$ASSETS" "$SRC" -type f -exec stat -c "%Y %n" {} + | sort -n | md5sum)
+  new_list=$(find "$COMPONENTS" "$ASSETS" "$SRC" -type f -exec stat -c "%Y %n" {} + | sort -n | md5sum)
   
   # Check if the list has changed
   if [ "$list" != "$new_list" ]; then

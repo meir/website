@@ -3,6 +3,7 @@
 SRC="./src"
 ASSETS="./assets"
 OUT="./site"
+COMPONENTS="./components"
 FILES=$(find "$SRC" -type f ! -name ".htm(l)")
 CNAME="yesimhuman.dev"
 
