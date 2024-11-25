@@ -98,6 +98,11 @@ EOF
 ```
 And not `EOF)`
 
+### Single quote issues
+
+Single quotes need to be escaped, even in EOF's these will still cause issues while rendering.
+To fix this, escape them using `\'` where applicable.
+
 ## License
 
 MIT
