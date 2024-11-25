@@ -1,0 +1,60 @@
+
+
+<html>
+  <head>
+    <title>izu - a unified hotkey config</title>
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script> <script>hljs.highlightAll();</script>
+  </head>
+  <body>
+    
+<nav>
+  <ul>
+    
+
+<li id="">
+  <a href="/">
+Home</a>
+</li>
+  </ul>
+</nav>
+    
+  
+<img src="/assets/polaroid_032.jpg" alt="polaroid" class="polaroid">
+
+  <article>
+    <h1>izu</h1>
+    
+
+<p>
+  izu is a unified hotkey config system for primarily Linux.
+  Atleast, that\'s what I call it.
+
+  To explain it in basic terms, izu is a program that allows you to write a single config file that can convert to config files for different hotkey daemons.
+  What this means is that if you want to swap from <a href="https://github.com/baskerville/sxhkd">sxhkd</a> to <a href="https://github.com/hyprwm/Hyprland">Hyprland</a>, then you don\'t have to rewrite your hotkey configuration in a different format.
+  You can just write it once in izu\'s format and then convert it to the format you need.
+
+  What if certain systems don't support the same programs and you have to change the command that the hotkey runs? izu supports this aswell by allowing you to define commands per system!
+
+  Here\'s an example of what a config file might look like:
+  
+
+
+<pre>
+  <code class="language-bash">
+    
+Super + q
+  sxhkd | bspc close -f
+  sway | swaymsg kill
+  hyprland | hyprctl dispatch killactive
+  </code>
+</pre>
+</p>
+
+  </article>
+
+    <footer>
+  <p>Last generated: Mon Nov 25 13:35:45 UTC 2024</p>
+</footer>
+  </body>
+</html>
