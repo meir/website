@@ -25,10 +25,9 @@ get_output() {
     path="$(dirname $path)/$(get_name $1)"
   fi
   mkdir -p "${OUT}${path}"
-  touch "${OUT}${path}index.htm"
-  echo "${OUT}${path}index.htm"
+  touch "${OUT}${path}/index.htm"
+  echo "${OUT}${path}/index.htm"
 }
-
 
 # render the content of the file
 render() {
@@ -47,6 +46,7 @@ render_all_files() {
     echo "Rendering $file to $output"
     url="$(dirname $output)"
     url="${url##"$OUT"}/"
+    root_file="$file"
     render "$file" > "$output" 
   done
   
