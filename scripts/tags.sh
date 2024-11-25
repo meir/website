@@ -15,7 +15,12 @@ tag() {
   fi
 
   local key=$1
+  if [[ -z $key || -z "$title" ]]; then
+    return
+  fi
+
   local title=$(echo $title | jq -aRs .)
+
   local entry=$(cat <<EOF
 [{
   "file": "$url",
