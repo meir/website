@@ -19,23 +19,19 @@ tag() {
     return
   fi
 
-  local title=$(echo $title | jq -aRs .)
-
-  local entry=$(cat <<EOF
-[{
-  "file": "$url",
-  "title": "$title"
-}]
-EOF
-)
-  jq -c ".\"$key\" += $entry" <<< $(<$tmp/tags.json) > $tmp/tags.json
+  local result=$(jq --arg key "$key" --arg url "$url" --arg title "$title" -c '.[$key] += [{ file: $url, title: $title }]' <<< $(<$tmp/tags.json))
+  echo "$result" > $tmp/tags.json
 }
 
 # get all the pages attached to a specific tag
 get_tagged() {
   local key=$1
-  local pages=$(jq -c ".\"$key\"[]" <<< $(<$tmp/tags.json))
-  echo $pages
+  local pages=$(jq --arg key "$key" -c 'if .[$key] | length > 0 then .[$key][] else empty end' <<< $(<$tmp/tags.json))
+  local output=()
+  while IFS= read -r line; do
+    output+=("$line")
+  done <<< "$pages"
+  echo "${output[@]}"
 }
 
 # get the url of a page
@@ -52,6 +48,6 @@ get_title() {
   local page="$@"
 
   local title=$(echo "$page" | jq -r ".title")
-  echo $title | jq -r
+  echo $title
 }
 

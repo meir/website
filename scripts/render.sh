@@ -47,7 +47,7 @@ render_all_files() {
     url="$(dirname $output)"
     url="${url##"$OUT"}/"
     root_file="$file"
-    render "$file" > "$output" 
+    render "$file" | ./prettify.sh > "$output" 
   done
   
   echo "Done rendering all files"

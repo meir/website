@@ -23,7 +23,7 @@ Some extra reasoning:
 
 - bash (5+)
 - jq
-- python3 (only for `./dev.sh`)
+- python3 (for `./dev.sh` and html prettifying)
 
 ### Nix/NixOS
 
