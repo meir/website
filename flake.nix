@@ -1,5 +1,5 @@
 {
-  description = "ssg in bash";
+  description = "website";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -16,10 +16,10 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        callPackage = pkgs.darwin.apple_sdk_11_0.callPackage or pkgs.callPackage;
       in
       {
-        devShells.default = callPackage ./shell.nix { };
+        devShells.default = pkgs.mkShell {
+        };
       }
     ));
 }

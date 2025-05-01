@@ -1,4 +1,3 @@
-
 name: generate-site
 on:
   push:
@@ -14,8 +13,16 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-      - name: Build
-        run: ./generate.sh
+      - name: "Setup environment"
+        uses: JRMurr/direnv-nix-action@4.1.0
+
+      - name: Generate
+        shell: bash
+        run: -|
+          mkdir site
+          mv placeholder.htm site/index.htm
+          echo "yesimhuman.dev" > site/CNAME
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
