@@ -18,7 +18,7 @@ jobs:
 
       - name: Generate
         shell: bash
-        run: -|
+        run: |
           mkdir site
           mv placeholder.htm site/index.htm
           echo "yesimhuman.dev" > site/CNAME
