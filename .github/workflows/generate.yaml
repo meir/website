@@ -13,8 +13,8 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup environment"
-        uses: JRMurr/direnv-nix-action@4.2.0
+      - name: direnv-nix
+        uses: JRMurr/direnv-nix-action@v4.2.0
 
       - name: Generate
         shell: bash
