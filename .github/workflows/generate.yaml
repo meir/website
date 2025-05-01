@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: "Setup environment"
-        uses: JRMurr/direnv-nix-action@4.1.0
+        uses: JRMurr/direnv-nix-action@4.2.0
 
       - name: Generate
         shell: bash
