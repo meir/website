@@ -1,0 +1,7 @@
+
+return (str title, element body) element {
+  return : html {
+    head > title > @{title}
+    body > @{body}
+  }
+}

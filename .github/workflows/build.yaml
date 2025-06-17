@@ -13,14 +13,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-      - name: direnv-nix
-        uses: JRMurr/direnv-nix-action@v4.2.0
 
       - name: Generate
+        uses: HatsuneMiku3939/direnv-action@v1
         shell: bash
         run: |
-          mkdir site
-          mv placeholder.htm site/index.htm
+          daisy build
           echo "yesimhuman.dev" > site/CNAME
 
       - name: Deploy

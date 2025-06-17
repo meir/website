@@ -1,5 +1,1 @@
-.direnv/
-.DS_Store
-site/
-bin/
-.env
+./site
