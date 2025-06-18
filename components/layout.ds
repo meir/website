@@ -1,7 +1,11 @@
+str style = use("assets/main.scss")
 
 return (str title, element body) element {
   return : html {
-    head > title > @{title}
+    head {
+      title > @{title}
+      link rel="stylesheet" href=@{style};
+    }
     body > @{body}
   }
 }

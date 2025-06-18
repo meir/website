@@ -1,4 +1,8 @@
 
-root = "./"
-src = "./src"
-output = "./site"
+[paths]
+workdir = "."
+pages = "src"
+output = "site"
+
+[assets]
+folder = "assets"
