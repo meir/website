@@ -1,6 +1,5 @@
 
 [paths]
-workdir = "."
 pages = "src"
 output = "site"
 
