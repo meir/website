@@ -1,4 +1,6 @@
+
 str style = use("assets/main.scss")
+func navigation = use("components/navigation")
 
 return (str title, element body) element {
   return : html {
@@ -6,6 +8,9 @@ return (str title, element body) element {
       title > @{title}
       link rel="stylesheet" href=@{style};
     }
-    body > @{body}
+    body {
+      @{navigation("/")}
+      @{body}
+    }
   }
 }

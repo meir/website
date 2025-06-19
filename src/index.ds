@@ -3,5 +3,8 @@ func layout = use("components/layout")
 
 return layout("Home", : main {
   h1 > "Hello world!"
-  section > p > "Welcome to the home page of our application."
+  section {
+    div#scroller;
+    p > "Welcome to the home page of our application."
+  }
 })
