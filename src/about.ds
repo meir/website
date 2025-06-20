@@ -1,0 +1,10 @@
+
+func layout = use("components/layout")
+
+return layout("About", : main {
+  h1 > "About"
+  section {
+    div#scroller;
+    p > "Welcome to the home page of our application."
+  }
+})
