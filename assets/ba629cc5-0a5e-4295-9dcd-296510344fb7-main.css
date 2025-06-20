@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Indie+Flower&family=Jacquard+12&display=swap");
+.font-indie-flower, html,
+body {
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-jacquard {
+  font-family: "Climate Crisis", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-climate-crisis, nav ul li a {
+  font-family: "Climate Crisis", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "YEAR" 1979;
+}
+
+nav {
+  width: 150px;
+  height: 100%;
+  background-color: #fce7c8;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset -30px 0px 20px -30px hsla(0deg, 0%, 0%, 0.25);
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  background-color: #f9d298;
+  border-top-right-radius: 12px;
+}
+nav ul li {
+  transition: transform 0.1s cubic-bezier(1, 2, 1, 1);
+  position: relative;
+  margin-top: -16px;
+  transform: scaleX(1.2);
+  transform-origin: top left;
+  display: block;
+  width: 100%;
+  height: 150px;
+}
+nav ul li#home {
+  background-color: #b1c29e;
+  border-bottom: 16px solid #98ae7f;
+  z-index: 1;
+}
+nav ul li#blog {
+  background-color: #fada7a;
+  border-bottom: 16px solid #f8cc49;
+  z-index: 2;
+}
+nav ul li#about {
+  background-color: #f0a04b;
+  border-bottom: 16px solid #ec871c;
+  z-index: 3;
+}
+nav ul li:hover {
+  transform: skewY(10deg) scaleX(1.2);
+}
+nav ul li.active {
+  transform: skewY(10deg) scaleX(1.2);
+}
+nav ul li a {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+  display: grid;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+nav span.blocker {
+  position: relative;
+  width: 100%;
+  height: 64px;
+  background-color: #fce7c8;
+  margin-top: -8px;
+  z-index: 4;
+  border-top-right-radius: 12px;
+  box-shadow: inset -30px 0px 20px -30px hsla(0deg, 0%, 0%, 0.25);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+}
+
+#scroller {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: black;
+  border-radius: 999px;
+  animation-name: grower;
+  animation-duration: 1ms;
+  animation-direction: alternate;
+  animation-timeline: scroll(y);
+  width: 10px;
+  height: 10px;
+}
+
+p {
+  height: 200%;
+}
+
+@keyframes grower {
+  from {
+    width: 100px;
+    height: 100px;
+  }
+  to {
+    width: 10px;
+    height: 10px;
+  }
+}
