@@ -1,6 +1,9 @@
+meta {
+  str url = "/404"
+}
 
 func layout = use("components/layout")
 
-return layout("Not found :(", : main {
+return layout(url, "Not found :(", : main {
   h1 > "No page found! Sorry :("
 })

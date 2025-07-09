@@ -6,8 +6,8 @@ func is_active = (str page, str item) str {
   return ""
 }
 
-func item = (str url, str title) element {
-  return : li id=@{title} class=@{is_active(url, "/")} {
+func item = (str active, str url, str title) element {
+  return : li id=@{title} class=@{is_active(url, active)} {
     a href=@{url} > @{title}
   }
 }
@@ -15,9 +15,9 @@ func item = (str url, str title) element {
 return (str active) element {
   return : nav {
     ul {
-      @{item("/", "home")}
-      @{item("/blog", "blog")}
-      @{item("/about", "about")}
+      @{item(active, "/", "home")}
+      @{item(active, "/blog", "blog")}
+      @{item(active, "/about", "about")}
     }
     span.blocker;
   }

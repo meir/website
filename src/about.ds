@@ -1,7 +1,10 @@
+meta {
+  str url = "/about"
+}
 
 func layout = use("components/layout")
 
-return layout("About", : main {
+return layout(url, "About", : main {
   h1 > "About"
   section {
     div#scroller;
