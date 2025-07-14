@@ -3,5 +3,3 @@
 pages = "src"
 output = "site"
 
-[assets]
-folder = "assets"
