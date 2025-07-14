@@ -1,23 +1,23 @@
 
-func is_active = (str page, str item) str {
-  if page == item {
+func is_active = (str current_url, str item_url) str {
+  if current_url == item_url {
     return "active"
   }
   return ""
 }
 
-func item = (str active, str url, str title) element {
-  return : li id=@{title} class=@{is_active(url, active)} {
-    a href=@{url} > @{title}
+func item = (str current_url, str item_url, str item_title) element {
+  return : li id=@{item_title} class=@{is_active(current_url, item_url)} {
+    a href=@{url} > @{item_title}
   }
 }
 
-return (str active) element {
+return (str current_url) element {
   return : nav {
     ul {
-      @{item(active, "/", "home")}
-      @{item(active, "/blog", "blog")}
-      @{item(active, "/about", "about")}
+      @{item(current_url, "/", "home")}
+      @{item(current_url, "/blog", "blog")}
+      @{item(current_url, "/about", "about")}
     }
     span.blocker;
   }

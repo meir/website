@@ -2,14 +2,14 @@
 str style = use("assets/main.scss")
 func navigation = use("components/navigation")
 
-return (str url, str title, element body) element {
+return (str current_url, str title, element body) element {
   return : html {
     head {
       title > @{title}
       link rel="stylesheet" href=@{style};
     }
     body {
-      @{navigation(url)}
+      @{navigation(current_url)}
       @{body}
     }
   }
