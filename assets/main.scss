@@ -1,5 +1,6 @@
 @import "assets/fonts";
 @import "assets/navigation";
+@import "assets/colors";
 
 html,
 body {
@@ -12,37 +13,50 @@ body {
   font-family: "Indie Flower", cursive;
   font-weight: 400;
   font-style: normal;
+  background-color: $background;
 }
 
 body {
   display: flex;
 }
 
-#scroller {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: black;
-  border-radius: 999px;
-  animation-name: grower;
-  animation-duration: 1ms;
-  animation-direction: alternate;
-  animation-timeline: scroll(y);
-  width: 10px;
-  height: 10px;
+main {
+  margin-left: 150px;
+  width: 100%;
+  height: 100%;
 }
 
-p {
-  height: 200%;
+article {
+  width: 80%;
+  background-color: $content-background;
+  color: $content-color;
 }
 
-@keyframes grower {
-  from {
-    width: 100px;
-    height: 100px;
-  }
-  to {
-    width: 10px;
-    height: 10px;
-  }
-}
+/* #scroller { */
+/*   position: fixed; */
+/*   top: 10px; */
+/*   right: 10px; */
+/*   background: black; */
+/*   border-radius: 999px; */
+/*   animation-name: grower; */
+/*   animation-duration: 1ms; */
+/*   animation-direction: alternate; */
+/*   animation-timeline: scroll(y); */
+/*   width: 10px; */
+/*   height: 10px; */
+/* } */
+/**/
+/* p { */
+/*   height: 200%; */
+/* } */
+/**/
+/* @keyframes grower { */
+/*   from { */
+/*     width: 100px; */
+/*     height: 100px; */
+/*   } */
+/*   to { */
+/*     width: 10px; */
+/*     height: 10px; */
+/*   } */
+/* } */

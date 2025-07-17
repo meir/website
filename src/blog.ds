@@ -4,10 +4,9 @@ meta {
 
 func layout = use("components/layout")
 
-return layout(url, "Blog", : main {
-  h1 > "Blog"
-  section {
-    div#scroller;
+return layout(url, "Blog", [
+  : h1 > "Hello world!",
+  : section {
     p > "Welcome to the home page of our application."
   }
-})
+])

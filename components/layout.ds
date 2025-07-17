@@ -2,7 +2,7 @@
 str style = use("assets/main.scss")
 func navigation = use("components/navigation")
 
-return (str current_url, str title, element body) element {
+return (str current_url, str title, table body) element {
   return : html {
     head {
       title > @{title}
@@ -10,7 +10,7 @@ return (str current_url, str title, element body) element {
     }
     body {
       @{navigation(current_url)}
-      @{body}
+      main > article > @{body}
     }
   }
 }
