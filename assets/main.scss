@@ -1,19 +1,18 @@
 @import "assets/fonts";
 @import "assets/navigation";
 @import "assets/colors";
+@import "assets/back";
 
 html,
 body {
-  @extend .font-indie-flower;
+  @extend .font-libertinus;
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
 
-  font-family: "Indie Flower", cursive;
-  font-weight: 400;
-  font-style: normal;
   background-color: $background;
+  color: $content-color;
 }
 
 body {
@@ -30,6 +29,49 @@ article {
   width: 80%;
   background-color: $content-background;
   color: $content-color;
+  margin: auto auto;
+  margin-top: 40px;
+  padding: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend .font-jacquard;
+  text-align: center;
+  color: $content-bright;
+  margin: 2px;
+}
+
+h1 {
+  font-size: 3.5em;
+}
+
+h2 {
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 2.5em;
+}
+
+h4 {
+  font-size: 2em;
+}
+
+h5 {
+  font-size: 1.5em;
+}
+
+h6 {
+  font-size: 1.2em;
+}
+
+p {
+  white-space: pre-line;
 }
 
 /* #scroller { */

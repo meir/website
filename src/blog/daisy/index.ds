@@ -1,0 +1,14 @@
+meta {
+  str url = "/blog/daisy"
+}
+
+func layout = use("components/layout")
+element back = use("components/back")
+
+return layout(url, "Daisy", [
+  back,
+  : h1 > "Daisy, the transpiler.",
+  : section {
+    p > "This page will be filled at a later date..."
+  }
+])

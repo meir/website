@@ -5,8 +5,8 @@ meta {
 func layout = use("components/layout")
 
 return layout(url, "Blog", [
-  : h1 > "Hello world!",
+  : h1 > "Blog.",
   : section {
-    p > "Welcome to the home page of our application."
+    p > "This page will be filled at a later date..."
   }
 ])

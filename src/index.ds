@@ -5,8 +5,15 @@ meta {
 func layout = use("components/layout")
 
 return layout(url, "Home", [
-  : h1 > "Hello world!",
+  : h1 > "Hello, world!",
   : section {
-    p > "Welcome to the home page of our application."
+    p > "Hi! I'm not sure how you found yourself on this little corner of the internet but I'm glad you did!"
+    p {
+      "
+        I'm Human, atleast thats what most of my friends call me.
+        I mostly just program and cause a little chaos, I like meddling with tech and learning about all sorts of topics.
+        Most times you can spot me playing some games or working on a project that I thought would be easy...
+      "
+    }
   }
 ])

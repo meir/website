@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Indie+Flower&family=Jacquard+12&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Dela+Gothic+One&family=Indie+Flower&family=Jacquard+12&family=Libertinus+Mono&display=swap");
 
 .font-indie-flower {
   font-family: "Indie Flower", cursive;
@@ -7,7 +7,7 @@
 }
 
 .font-jacquard {
-  font-family: "Climate Crisis", cursive;
+  font-family: "Jacquard 12", system-ui;
   font-weight: 400;
   font-style: normal;
 }
@@ -18,4 +18,16 @@
   font-weight: 400;
   font-style: normal;
   font-variation-settings: "YEAR" 1979;
+}
+
+.font-dela-gothic {
+  font-family: "Dela Gothic One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-libertinus {
+  font-family: "Libertinus Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
 }

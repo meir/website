@@ -1,0 +1,69 @@
+@import "colors";
+@import "fonts";
+
+@keyframes back {
+  0% {
+    --content: "戻る";
+  }
+  25% {
+    --content: "返回";
+  }
+  50% {
+    --content: "zpět";
+  }
+  75% {
+    --content: "назад";
+  }
+  100% {
+    --content: "πίσω";
+  }
+}
+
+.back {
+  @extend .font-dela-gothic;
+  color: $color-back;
+  text-transform: uppercase;
+  border-bottom: 3px solid $color-back;
+  display: inline-block;
+  overflow: hidden;
+  text-decoration: none;
+
+  animation: back 500ms infinite;
+
+  & span {
+    display: block;
+    padding: 0 2px;
+
+    transition: all 0.5s ease;
+    transform-origin: 100% 0%;
+    transform-style: preserve-3d;
+  }
+}
+
+.back span::after {
+  content: var(--content);
+
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0 2px;
+
+  transform-origin: 50% 0%;
+  transform: translate3d(0px, 105%, 0px) rotateX(-90deg);
+}
+
+.back:hover {
+  animation-play-state: paused;
+
+  & span {
+    transform: translate3d(0px, 0px, 0px) rotateX(90deg) skewY(30deg);
+    &::before {
+      content: var(--content);
+      display: block;
+      padding: 0 2px;
+      height: 0px;
+      color: transparent;
+    }
+  }
+}
