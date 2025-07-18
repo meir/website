@@ -1,12 +1,23 @@
 meta {
   str url = "/blog"
+  str title = "Blog"
 }
 
 func layout = use("components/layout")
 
-return layout(url, "Blog", [
+return layout([
   : h1 > "Blog.",
   : section {
-    p > "This page will be filled at a later date..."
+    ul {
+      for page in std.pages() {
+        if page.tag == "blog" {
+          collect : li {
+            a href=@{page.url} {
+              @{page.title}
+            }
+          }
+        }
+      }
+    }
   }
 ])

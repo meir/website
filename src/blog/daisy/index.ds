@@ -1,11 +1,13 @@
 meta {
   str url = "/blog/daisy"
+  str title = "Daisy, the transpiler."
+  str tag = "blog"
 }
 
 func layout = use("components/layout")
 element back = use("components/back")
 
-return layout(url, "Daisy", [
+return layout([
   back,
   : h1 > "Daisy, the transpiler.",
   : section {

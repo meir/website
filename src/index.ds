@@ -1,10 +1,11 @@
 meta {
   str url = "/"
+  str title = "Home"
 }
 
 func layout = use("components/layout")
 
-return layout(url, "Home", [
+return layout([
   : h1 > "Hello, world!",
   : section {
     p > "Hi! I'm not sure how you found yourself on this little corner of the internet but I'm glad you did!"
