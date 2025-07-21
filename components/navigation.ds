@@ -1,4 +1,3 @@
-
 func is_active = (str item_url) str {
   if meta.url == item_url {
     return "active"
