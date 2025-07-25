@@ -6,8 +6,8 @@ func is_active = (str item_url) str {
 }
 
 func item = (str item_url, str item_title) element {
-  return : li id=@{item_title} class=@{is_active(item_url)} {
-    a href=@{item_url} > @{item_title}
+  return : li id=(item_title) class=(is_active(item_url)) {
+    a href=(item_url) > @{item_title}
   }
 }
 

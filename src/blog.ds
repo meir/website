@@ -12,7 +12,7 @@ return layout([
       for page in std.pages() {
         if page.tag == "blog" {
           collect : li {
-            a href=@{page.url} {
+            a href=(page.url) {
               @{page.title}
             }
           }
