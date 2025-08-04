@@ -5,6 +5,13 @@ meta {
 
 func layout = use("components/layout")
 
+func get_date = (map page) str {
+  if page.date != nil {
+    return page.date
+  }
+  return "Unknown date"
+}
+
 return layout([
   : h1 > "Blog.",
   : section {
@@ -12,6 +19,7 @@ return layout([
       for page in std.pages() {
         if page.tag == "blog" {
           collect : li {
+            span > @{std.format("{} — ", get_date(page))}
             a href=(page.url) {
               @{page.title}
             }

@@ -2,39 +2,31 @@
 str giscus_repo = "meir/website"
 
 func get_channel = (str name = "general") str {
-  if name == "general" {
-    return "DIC_kwDOIyQOzM4CkKe5"
+  map topic_ids = {
+    str general = "DIC_kwDOIyQOzM4CkKe5"
+    str announcements = "DIC_kwDOIyQOzM4CkKe4"
+    str ideas = "DIC_kwDOIyQOzM4CkKe7"
+    str polls = "DIC_kwDOIyQOzM4CkKe9"
+    str qna = "DIC_kwDOIyQOzM4CkKe6"
+    str showntell = "DIC_kwDOIyQOzM4CkKe8"
   }
-  if name == "announcements" {
-    return "DIC_kwDOIyQOzM4CkKe4"
-  }
-  if name == "ideas" {
-    return "DIC_kwDOIyQOzM4CkKe7"
-  }
-  if name == "polls" {
-    return "DIC_kwDOIyQOzM4CkKe9"
-  }
-  if name == "qna" {
-    return "DIC_kwDOIyQOzM4CkKe6"
-  }
-  if name == "showntell" {
-    return "DIC_kwDOIyQOzM4CkKe8"
-  }
-  return "DIC_kwDOIyQOzM4CkKe5"
+  
+  return topic_ids.general
 }
 
+str style = use("assets/giscus.scss")
 
 return (str channel = "general") element {
   return : script
     src="https://giscus.app/client.js"
-    data-repo=@{giscus_repo}
-    data-category-id=@{get_channel(channel)}
+    data-repo=(giscus_repo)
+    data-category-id=(get_channel(channel))
     data-mapping="pathname"
     data-strict="0"
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
+    data-theme=(std.format("https://yesimhuman.dev/{}", style))
     data-lang="en"
     data-loading="lazy"
     crossorigin="anonymous"

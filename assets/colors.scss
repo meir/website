@@ -1,12 +1,13 @@
-$background: #2c2c2c;
+$background: #0c0c0c;
 $content-background: #faf0e6;
 $content-color: #522546;
 $content-bright: #88304e;
 $content-accent: #f7374f;
+$content-shadow: darken($content-background, 10%);
 
 $color-back: #f7374f;
 
-$nav-background: #7c444f;
-$color-a: #f39e60;
-$color-b: #e16a54;
-$color-c: #9f5255;
+$nav-background: #604652;
+$color-a: #d29f80;
+$color-b: #97866a;
+$color-c: #735557;

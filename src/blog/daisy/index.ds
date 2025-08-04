@@ -2,15 +2,18 @@ meta {
   str url = "/blog/daisy"
   str title = "Daisy, the transpiler."
   str tag = "blog"
+  str date = "04-08-2025"
 }
 
 func layout = use("components/layout")
 element back = use("components/back")
+func giscus = use("components/giscus")
 
 return layout([
   back,
   : h1 > "Daisy, the transpiler.",
   : section {
     p > "This page will be filled at a later date..."
-  }
+  },
+  giscus()
 ])
