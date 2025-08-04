@@ -214,6 +214,7 @@ body {
   padding: 0;
   margin: 0;
   background-color: #0c0c0c;
+  background-image: url(/assets/images/background.svg);
   background-repeat: repeat;
   color: #522546;
 }
