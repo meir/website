@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512"
+     xmlns="http://www.w3.org/2000/svg" 
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     style="background: transparent;">
+  <defs>
+    <filter id="grimeNoise" x="0" y="0" width="100%" height="100%">
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.4"
+        numOctaves="4"
+        stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0.7"/>
+      <!-- Make almost everything transparent except high values (grime blobs) -->
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0 0 0 0 0 0 0 0 0.01 0.5 0.9 1"/>
+      </feComponentTransfer>
+    </filter>
+    <pattern id="grimeTile" patternUnits="userSpaceOnUse" width="200" height="200">
+      <!-- No base fill; transparent background -->
+      <rect width="200" height="200" filter="url(#grimeNoise)" fill="#fff" opacity="0.65"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grimeTile)"/>
+</svg>

@@ -1,5 +1,6 @@
 
 str giscus_repo = "meir/website"
+str giscus_repo_id = "R_kgDOIyQOzA"
 
 func get_channel = (str name = "general") str {
   map topic_ids = {
@@ -20,6 +21,7 @@ return (str channel = "general") element {
   return : script
     src="https://giscus.app/client.js"
     data-repo=(giscus_repo)
+    data-repo-id=(giscus_repo_id)
     data-category-id=(get_channel(channel))
     data-mapping="pathname"
     data-strict="0"

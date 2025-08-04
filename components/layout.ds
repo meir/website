@@ -16,6 +16,8 @@ func description = () str {
   return "A blog about web development, programming, and more."
 }
 
+str background = use("assets/images/background.svg")
+
 return (list body) element {
   return : html lang="en" {
     head {
