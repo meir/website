@@ -42,7 +42,7 @@ body {
 nav {
   width: 150px;
   height: 100%;
-  background-color: #7c444f;
+  background-color: #604652;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -55,7 +55,7 @@ nav ul {
   padding: 0;
   margin: 0;
   width: 100%;
-  background-color: #5b323a;
+  background-color: #433039;
   border-top-right-radius: 12px;
 }
 nav ul li {
@@ -69,18 +69,18 @@ nav ul li {
   height: 150px;
 }
 nav ul li#home {
-  background-color: #f39e60;
-  border-bottom: 16px solid #ef8131;
+  background-color: #d29f80;
+  border-bottom: 16px solid #c5835a;
   z-index: 1;
 }
 nav ul li#blog {
-  background-color: #e16a54;
-  border-bottom: 16px solid #d94429;
+  background-color: #97866a;
+  border-bottom: 16px solid #796b55;
   z-index: 2;
 }
 nav ul li#about {
-  background-color: #9f5255;
-  border-bottom: 16px solid #7d4143;
+  background-color: #735557;
+  border-bottom: 16px solid #563f41;
   z-index: 3;
 }
 nav ul li:hover {
@@ -103,7 +103,7 @@ nav span.blocker {
   position: relative;
   width: 100%;
   height: 64px;
-  background-color: #7c444f;
+  background-color: #604652;
   margin-top: -8px;
   z-index: 4;
   border-top-right-radius: 12px;
@@ -213,7 +213,8 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: #2c2c2c;
+  background-color: #0c0c0c;
+  background-repeat: repeat;
   color: #522546;
 }
 
@@ -227,8 +228,13 @@ main {
   height: 100%;
 }
 
+a {
+  color: #f7374f;
+}
+
 article {
   width: 80%;
+  box-shadow: 20px 20px 0px 0px #f2d7bc;
   background-color: #faf0e6;
   color: #522546;
   margin: auto auto;
@@ -274,32 +280,3 @@ h6 {
 p {
   white-space: pre-line;
 }
-
-/* #scroller { */
-/*   position: fixed; */
-/*   top: 10px; */
-/*   right: 10px; */
-/*   background: black; */
-/*   border-radius: 999px; */
-/*   animation-name: grower; */
-/*   animation-duration: 1ms; */
-/*   animation-direction: alternate; */
-/*   animation-timeline: scroll(y); */
-/*   width: 10px; */
-/*   height: 10px; */
-/* } */
-/**/
-/* p { */
-/*   height: 200%; */
-/* } */
-/**/
-/* @keyframes grower { */
-/*   from { */
-/*     width: 100px; */
-/*     height: 100px; */
-/*   } */
-/*   to { */
-/*     width: 10px; */
-/*     height: 10px; */
-/*   } */
-/* } */
