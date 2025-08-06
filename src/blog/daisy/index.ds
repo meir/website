@@ -63,7 +63,7 @@ return layout([
       float c = 1.2
       bool d = true
       element e = : div > "element"
-      func f = (str input) { return input }
+      func f = (str input) str { return input }
       map g = { str key = "value" }
       list h = [ "value", 1 ]
     ''
