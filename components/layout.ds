@@ -30,14 +30,21 @@ return (list body) list {
         meta name="description" content=(description());
 
         link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.css" async="";
-        script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" async="";
+        script#hljs_script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" async="";
       }
       body {
         @{navigation()}
         main > article > @{body}
         script async="" > ''
-          hljs.configure({ cssSelector: 'code' });
-          hljs.highlightAll();
+          (function load_hljs() {
+            if (window.hljs) {
+              hljs.configure({ cssSelector: 'code' });
+              hljs.highlightAll();
+              console.log("Highlight.js loaded and initialized.");
+            }else{
+              document.scripts.hljs_script.onload = load_hljs;
+            }
+          }())
         ''
       }
     }
