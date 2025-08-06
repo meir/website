@@ -1,0 +1,6 @@
+
+return (str html) str {
+  html = std.replace(html, "<", "&lt;")
+  html = std.replace(html, ">", "&gt;")
+  return html
+}

@@ -33,6 +33,7 @@ a {
 
 article {
   width: 80%;
+  max-width: 800px;
   box-shadow: 20px 20px 0px 0px $content-shadow;
   background-color: $content-background;
   color: $content-color;
@@ -79,4 +80,8 @@ h6 {
 
 p {
   white-space: pre-line;
+}
+
+code {
+  border-radius: 5px;
 }

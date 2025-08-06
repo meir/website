@@ -12,12 +12,25 @@ func get_date = (map page) str {
   return "Unknown date"
 }
 
+func is_blog_item = (list tags) bool {
+  if tags == nil {
+    return false
+  }
+
+  for tag in tags {
+    if tag == "blog" {
+      return true
+    }
+  }
+  return false
+}
+
 return layout([
   : h1 > "Blog.",
   : section {
     ul {
       for page in std.pages() {
-        if page.tag == "blog" {
+        if is_blog_item(page.tags) {
           collect : li {
             span > @{std.format("{} — ", get_date(page))}
             a href=(page.url) {

@@ -1,11 +1,15 @@
 meta {
   str url = "/blog/daisy"
   str title = "Daisy, the transpiler."
-  str tag = "blog"
+  list tags = [
+    "blog",
+    "projects"
+  ]
   str date = "04-08-2025"
 }
 
 func layout = use("components/layout")
+func escape_html = use("components/escape_html")
 element back = use("components/back")
 func giscus = use("components/giscus")
 
@@ -13,7 +17,155 @@ return layout([
   back,
   : h1 > "Daisy, the transpiler.",
   : section {
-    p > "This page will be filled at a later date..."
+    p > ''
+      This project has had many iterations and by no means is it perfect.
+      The idea came because of my frustration with constantly having to update dependencies, get the pipeline updated, and fix everything thats outdated.
+      I'ts a never ending cycle in javascript frameworks and I never really wanted another project I have to maintain just to write this.
+      
+      So now I made another project I have to maintain just to write this, but no more dependency hell I guess?
+    ''
+    a href="https://github.com/meir/daisy" target="_blank" > "Daisy on GitHub"
+
+    h2 > "What is this?"
+    p > ''
+      The answer is simple, this is a transpiler that turns a custom made-up language into static HTML so that I can just put it on GitHub pages and never look at it again.
+      
+      Should you use this? Not really? 
+      I made this to be what I want it to be, but it's nowhere anything I dream of it being.
+      For example, ideally I want improved SEO checks, RSS generation, Accessibility checks and Semantics requirements.
+      
+      This will probably take forever to implement while I'm still at the part where I need to add comments, tests, refactors, etc. still.
+    ''
+
+    h2 > "How does it work?"
+    p > ''
+      So the way Daisy works is that it parses all the files beforehand in the source folder, these are all your webpages.
+      
+      All of them will be assigned a url depending on their file location or the url specified in the meta block.
+      After that they go through the runtime where they can import files which all will be added in the store of the resolver.
+      And finally all the results from the resolver will be saved into their output locations.
+
+      This is what a meta block looks like:
+    ''
+    pre > code > ''
+      meta {
+        str url = "/blog/daisy"
+      }
+    ''
+
+    h3 > "Types."
+    p > ''
+      Daisy has a couple of types that can be used, theyre quite basic at the moment and don't have a lot of underlying methods or anything.
+    ''
+    pre > code > ''
+      str a = "string"
+      num b = 1
+      float c = 1.2
+      bool d = true
+      element e = : div > "element"
+      func f = (str input) { return input }
+      map g = { str key = "value" }
+      list h = [ "value", 1 ]
+    ''
+    
+    p {
+      ''
+        as you can see aswell, functions arent specifically functions, you just assign them in a variable definition as I want to keep the language as stupid as possible.
+
+        The same applies to lists and maps, I want to keep the language statically typed but maps and lists are straightup variable scopes, meaning theyre dynamic with their content, but the definitions in them are not.
+        This means if you have a map such as 
+      ''
+      code > "map x = { str field = \"value\"}"
+      " then " code > "field" " will always be a string."
+    }
+
+    h3 > "Elements."
+    p {
+      ''
+        One big requirement of this project to me was how to define elements.
+        I really dislike how HTML is basically just XML, I wanted to change this.
+        We already have a much better option for this (sort of) in my opinion, 
+      '' a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector" target="_blank" > "Document Query Selectors." ''
+        
+        If we already have a solution to query elements using shorthands, then why can't we create them using those same shorthands?
+
+        That's why I decided to create elements simply by stating the tag straightoff, if you want a class, add them using a dot and for an ID add it with a pound/hashtag.
+        For other attributes, just define them right after as if it's inside the HTML already.
+        Due to limitations with the parser, since LALRPOP does not support look ahead, starting a block of elements has to start using a colon.
+
+        What does this look like?
+      ''
+      pre > code > ''
+        element x = : html {
+          head > title > "Document title"
+          body {
+            main {
+              nav > ul {
+                li > h1#website-name > "Super Duper Cool Website"
+                li > a#home.link href="/" > "Home"
+                li > a#blog.link href="/blog" > "Blog"
+                li > a#about.link href="/about" > "About"
+              }
+
+              section#content {
+                h2#content-title > "Super Duper Cool Title"
+                p > \''
+                  Welcome to my super duper cool website! B)
+                \''
+              }
+            }
+          }
+        }
+      ''
+
+      p > "After parsing and building this, this will result into the following:"
+      pre > code.language-html > @{escape_html(''
+        <html>
+          <head>
+            <title>
+              Document title
+            </title>
+          </head>
+          <body>
+            <main>
+              <nav>
+                <ul>
+                  <li>
+                    <h1 id="website-name">Super Duper Cool Website</h1>
+                  </li>
+                  <li>
+                    <a id="home" class="link" href="/">Home</a>
+                  </li>
+                  <li>
+                    <a id="blog" class="link" href="/blog">Blog</a>
+                  </li>
+                  <li>
+                    <a id="about" class="link" href="/about">About</a>
+                  </li>
+                </ul>
+              </nav>
+              <section id="content">
+                <h2 id="content-title">Super Duper Cool Title</h2>
+                <p>
+                  Welcome to my super duper cool website! B)
+                </p>
+              </section>
+            </main>
+          </body>
+        </html>
+      '')}
+
+      p {
+        ''
+          There's much more going on in the background and some extra features such as importing files using methods.
+
+          But for now enough showcasing and explaining, for more examples you can look in the source code of 
+        ''
+        a href="https://github.com/meir/website" target="_blank" > "this website"
+        " or in the examples folder of "
+        a href="https://github.com/meir/daisy" target="_blank" > "the Daisy transpiler."
+      }
+    }
   },
   giscus()
 ])
