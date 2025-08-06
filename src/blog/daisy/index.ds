@@ -85,7 +85,7 @@ return layout([
         One big requirement of this project to me was how to define elements.
         I really dislike how HTML is basically just XML, I wanted to change this.
         We already have a much better option for this (sort of) in my opinion, 
-      '' a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector" target="_blank" > "Document Query Selectors." ''
+      '' a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors" target="_blank" > "CSS Selectors." ''
         
         If we already have a solution to query elements using shorthands, then why can't we create them using those same shorthands?
 
