@@ -17,7 +17,7 @@ func is_blog_item = (list tags) bool {
     return false
   }
 
-  for tag in tags {
+  for _, tag in tags {
     if tag == "blog" {
       return true
     }
@@ -29,7 +29,7 @@ return layout([
   : h1 > "Blog.",
   : section {
     ul {
-      for page in std.pages() {
+      for _, page in std.pages() {
         if is_blog_item(page.tags) {
           collect : li {
             span > @{std.format("{} — ", get_date(page))}

@@ -12,7 +12,7 @@ func get_channel = (str name = "general") str {
     str showntell = "DIC_kwDOIyQOzM4CkKe8"
   }
   
-  return topic_ids.general
+  return topic_ids[name]
 }
 
 str style = use("assets/giscus.scss")
