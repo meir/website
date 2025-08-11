@@ -2,6 +2,13 @@
 use("assets/images/background.svg")
 str style = use("assets/main.scss")
 func navigation = use("components/navigation")
+str license = use("LICENSE")
+
+map images = {
+  str nonazi = use("assets/images/nonazi.png")
+  str lgbtq = use("assets/images/flag_pride.png")
+  str trans = use("assets/images/flag_transgender.png")
+}
 
 func title = () str {
   if meta.title != nil {
@@ -36,15 +43,26 @@ return (list body) list {
         meta name="viewport" content="width=device-width, initial-scale=1.0";
         meta name="description" content=(description());
 
-        link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.css" async="";
-        script#hljs_script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" async="";
+        link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.css" async;
+        script#hljs_script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" async;
 
         @{headers()}
       }
       body {
         @{navigation()}
-        main > article > @{body}
-        script async="" > ''
+        main {
+          article > @{body}
+          footer {
+            div#footer-images {
+              for key, src in images {
+                collect : img id=(key) src=(src) alt=(key) loading="lazy";
+              }
+            }
+            span > @{std.format("Last generated: {}", $`date +'%d/%m/%Y @ %H:%M'`)}
+            a#license href=(license) > "MIT @ 2025"
+          }
+        }
+        script async > ''
           (function load_hljs() {
             if (window.hljs) {
               hljs.configure({ cssSelector: 'code' });
