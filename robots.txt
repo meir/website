@@ -2,4 +2,4 @@ User-agent: googlebot
 Allow: /
 
 User-agent: *
-Disallow:
+Disallow: /
