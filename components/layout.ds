@@ -1,5 +1,6 @@
 
 use("assets/images/background.svg")
+use("robots.txt")
 str style = use("assets/main.scss")
 func navigation = use("components/navigation")
 str license = use("LICENSE")
