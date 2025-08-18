@@ -17,7 +17,6 @@ jobs:
       - name: Install direnv with Nix
         uses: aldoborrero/direnv-nix-action@v2
         with:
-          use_nix_profile: true
           nix_channel: nixpkgs
 
       - name: Generate
