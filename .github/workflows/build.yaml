@@ -19,7 +19,7 @@ jobs:
           nix profile add nixpkgs#direnv
       - name: Open direnv shell
         run: |
-          direnv allow
+          direnv allow .
 
       - name: Generate
         run: |
