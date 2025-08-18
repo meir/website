@@ -1,0 +1,75 @@
+meta {
+  str url = "/blog/babysteps-into-zig"
+  str title = "Babysteps into Zig."
+  list tags = [
+    "blog",
+  ]
+  str date = "15-08-2025"
+}
+
+func layout = use("components/layout")
+element back = use("components/back")
+func giscus = use("components/giscus")
+func format = std.format
+
+return layout([
+  back,
+  : h1 > "Babysteps into Zig.",
+  : section {
+    p {
+      @{format(''
+        I've been trying to find a "perfect" programming language lately, it's why I made my static site generator, {daisy}, to learn {rust}.
+        Recently I came across {zig}.
+        It was explained to me as the next-gen C. I've tried C before but always left with a sour taste in my mouth due to the amounts of {segfault} with no handholding to get into the language.
+      '', {
+        element daisy = : a href="/blog/daisy" > "Daisy"
+        element rust = : a href="https://www.rust-lang.org/" > "Rust"
+        element zig = : a href="https://ziglang.org/" > "Zig"
+        element segfault = : code > "segmentation fault. (Core dumped)"
+      })}
+    }
+    blockquote {
+      ''
+        "Core dumped? Have you tried fixing their relationship?" ~friendo
+      ''
+    }
+    p {
+      @{format(''
+        Anyways, in order to understand the basic syntax, I quickly made a Matrix struct with some methods.
+        One thing that surprised me is that arrays with a set size need their size determined at compile time.
+        This was instantly my first introduction to {compiletime} which is a specific keyword in Zig.
+        
+        And from this I learned quickly that this language is almost at the level of difficulty of C but with errors that make sense to humans.
+
+        For example, the solution to making an array with a set size turned out to require an {allocator} to claim memory in the stack for a known size.
+        This already terrifies and intrigues me.
+      '', {
+        element compiletime = : a href="https://ziglang.org/documentation/0.14.1/#At-Compile-Time" > "compile time"
+        element allocator = : a href="https://zig.guide/standard-library/allocators/" > "Allocator"
+      })}
+    }
+
+    h2 > "The plan."
+    p {
+      @{format(''
+        Recently I've also been talking to a friend of mine, and I've been wanting to get into radio technology.
+        If I can, most possibly {radio_astronomy}.
+
+        For this there's one big thing that's used for any piece of radio tech software, a {dsp}.
+        Ofcourse this includes a lot of research and learning, so this blog/guide/exploration(?) is not done yet.
+        This is only the first part of a long road to learn more things that intrigue me.
+      '', {
+        element radio_astronomy = : a href="https://en.wikipedia.org/wiki/Radio_astronomy" > "radio astronomy"
+        element dsp = : a href="https://en.wikipedia.org/wiki/Digital_signal_processor" > "DSP (Digital Signal Processor)"
+      })}
+    }
+    p {
+      @{format(''
+        If you're curious what my first step is going to be or if you want to get started aswell, this is one of the resources I found that looks very promising: {dsp_playlist}
+      '', {
+        element dsp_playlist = : a href="https://www.youtube.com/playlist?list=PLuh62Q4Sv7BUSzx5Jr8Wrxxn-U10qG1et" > "Digital Signal Processing on YouTube"
+      })}
+    }
+  },
+  giscus()
+])

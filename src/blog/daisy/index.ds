@@ -12,6 +12,7 @@ func layout = use("components/layout")
 func escape_html = use("components/escape_html")
 element back = use("components/back")
 func giscus = use("components/giscus")
+func format = std.format
 
 return layout([
   back,
@@ -69,23 +70,23 @@ return layout([
     ''
     
     p {
-      ''
+      @{format(''
         as you can see aswell, functions arent specifically functions, you just assign them in a variable definition as I want to keep the language as stupid as possible.
 
         The same applies to lists and maps, I want to keep the language statically typed but maps and lists are straightup variable scopes, meaning theyre dynamic with their content, but the definitions in them are not.
-        This means if you have a map such as 
-      ''
-      code > "map x = { str field = \"value\"}"
-      " then " code > "field" " will always be a string."
+        This means if you have a map such as {map_example} then {field} will always be a string.
+      '', {
+        element map_example = : code > "map x = { str field = \"value\" }"
+        element field = : code > "field"
+      })}
     }
 
     h3 > "Elements."
     p {
-      ''
+      @{format(''
         One big requirement of this project to me was how to define elements.
         I really dislike how HTML is basically just XML, I wanted to change this.
-        We already have a much better option for this (sort of) in my opinion, 
-      '' a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors" target="_blank" > "CSS Selectors." ''
+        We already have a much better option for this (sort of) in my opinion, {css_selectors}
         
         If we already have a solution to query elements using shorthands, then why can't we create them using those same shorthands?
 
@@ -94,7 +95,9 @@ return layout([
         Due to limitations with the parser, since LALRPOP does not support look ahead, starting a block of elements has to start using a colon.
 
         What does this look like?
-      ''
+      '', {
+        element css_selectors = : a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors" target="_blank" > "CSS Selectors."
+      })}
       pre > code > ''
         element x = : html {
           head > title > "Document title"
@@ -156,14 +159,14 @@ return layout([
       '')}
 
       p {
-        ''
+        @{format(''
           There's much more going on in the background and some extra features such as importing files using methods.
 
-          But for now enough showcasing and explaining, for more examples you can look in the source code of 
-        ''
-        a href="https://github.com/meir/website" target="_blank" > "this website"
-        " or in the examples folder of "
-        a href="https://github.com/meir/daisy" target="_blank" > "the Daisy transpiler."
+          But for now enough showcasing and explaining, for more examples you can look in the source code of {website_repo} or in the examples folder of {daisy_repo}.
+        '', {
+          element website_repo = : a href="https://github.com/meir/website" target="_blank" > "this website"
+          element daisy_repo = : a href="https://github.com/meir/daisy" target="_blank" > "the Daisy transpiler."
+        })}
       }
     }
   },
