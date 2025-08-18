@@ -16,7 +16,9 @@ jobs:
       - uses: cachix/install-nix-action@v31.5.2
       - name: Install direnv
         run: |
-          nix profile install nixpkgs#direnv
+          nix profile add nixpkgs#direnv
+      - name: Open direnv shell
+        run: |
           direnv allow
 
       - name: Generate
