@@ -13,11 +13,11 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v23
-      - name: Install direnv with Nix
-        uses: aldoborrero/direnv-nix-action@v2
-        with:
-          nix_channel: nixpkgs
+      - uses: cachix/install-nix-action@v31.5.2
+      - name: Install direnv
+        run: |
+          nix profile install nixpkgs#direnv
+          direnv allow
 
       - name: Generate
         run: |
