@@ -20,6 +20,7 @@ jobs:
       - name: Open direnv shell
         run: |
           direnv allow .
+          direnv export gha > "$GITHUB_ENV"
 
       - name: Generate
         run: |
