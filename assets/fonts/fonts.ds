@@ -1,0 +1,11 @@
+
+func use_font = (str name) {
+  use(std.format("assets/fonts/{}", name))
+}
+
+use_font("DinaRemasterII.ttf")
+use_font("DelaGothicOne-Regular.ttf")
+use_font("IndieFlower-Regular.ttf")
+use_font("Jacquard12-Regular.ttf")
+use_font("LibertinusMono-Regular.ttf")
+use_font("ClimateCrisis-Regular.ttf")

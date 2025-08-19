@@ -105,5 +105,17 @@ p {
 }
 
 code {
+  @extend .font-dina-remaster-ii;
   border-radius: 5px;
+}
+
+blockquote {
+  @extend .font-indie-flower;
+  padding: 10px 10px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  background-color: $color-b;
+  border: 2px solid $color-c;
+  text-align: center;
+  color: white;
 }
