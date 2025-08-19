@@ -4,7 +4,7 @@ use("robots.txt")
 use("assets/fonts/fonts")
 str style = use("assets/main.scss")
 func navigation = use("components/navigation")
-str license = use("LICENSE")
+str license = use("LICENSE.md")
 
 map images = {
   str nonazi = use("assets/images/nonazi.png")
