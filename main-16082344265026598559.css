@@ -1,12 +1,18 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Dela+Gothic+One&family=Indie+Flower&family=Jacquard+12&family=Libertinus+Mono&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Dela+Gothic+One&family=Indie+Flower&family=Jacquard+12&family=Libertinus+Mono&display=swap");
-.font-indie-flower {
+@font-face {
+  font-family: "Indie Flower";
+  src: url(/assets/fonts/IndieFlower-Regular.ttf);
+}
+.font-indie-flower, blockquote {
   font-family: "Indie Flower", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Jacquard 12";
+  src: url(/assets/fonts/Jacquard12-Regular.ttf);
+}
 .font-jacquard, h1,
 h2,
 h3,
@@ -18,6 +24,10 @@ h6 {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Climate Crisis";
+  src: url(/assets/fonts/ClimateCrisis-Regular.ttf);
+}
 .font-climate-crisis, nav ul li a {
   font-family: "Climate Crisis", sans-serif;
   font-optical-sizing: auto;
@@ -26,15 +36,33 @@ h6 {
   font-variation-settings: "YEAR" 1979;
 }
 
+@font-face {
+  font-family: "Dela Gothic One";
+  src: url(/assets/fonts/DelaGothicOne-Regular.ttf);
+}
 .font-dela-gothic, .back {
   font-family: "Dela Gothic One", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Libertinus Mono";
+  src: url(/assets/fonts/LibertinusMono-Regular.ttf);
+}
 .font-libertinus, html,
 body {
   font-family: "Libertinus Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Dina Remaster II";
+  src: url(/assets/fonts/DinaRemasterII.ttf);
+}
+.font-dina-remaster-ii, code {
+  font-family: "Dina Remaster II", monospace;
   font-weight: 400;
   font-style: normal;
 }
@@ -110,12 +138,20 @@ nav span.blocker {
   box-shadow: inset -30px 0px 20px -30px hsla(0deg, 0%, 0%, 0.25);
 }
 
-.font-indie-flower {
+@font-face {
+  font-family: "Indie Flower";
+  src: url(/assets/fonts/IndieFlower-Regular.ttf);
+}
+.font-indie-flower, blockquote {
   font-family: "Indie Flower", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Jacquard 12";
+  src: url(/assets/fonts/Jacquard12-Regular.ttf);
+}
 .font-jacquard, h1,
 h2,
 h3,
@@ -127,6 +163,10 @@ h6 {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Climate Crisis";
+  src: url(/assets/fonts/ClimateCrisis-Regular.ttf);
+}
 .font-climate-crisis, nav ul li a {
   font-family: "Climate Crisis", sans-serif;
   font-optical-sizing: auto;
@@ -135,15 +175,33 @@ h6 {
   font-variation-settings: "YEAR" 1979;
 }
 
+@font-face {
+  font-family: "Dela Gothic One";
+  src: url(/assets/fonts/DelaGothicOne-Regular.ttf);
+}
 .font-dela-gothic, .back {
   font-family: "Dela Gothic One", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Libertinus Mono";
+  src: url(/assets/fonts/LibertinusMono-Regular.ttf);
+}
 .font-libertinus, html,
 body {
   font-family: "Libertinus Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Dina Remaster II";
+  src: url(/assets/fonts/DinaRemasterII.ttf);
+}
+.font-dina-remaster-ii, code {
+  font-family: "Dina Remaster II", monospace;
   font-weight: 400;
   font-style: normal;
 }
@@ -306,4 +364,14 @@ p {
 
 code {
   border-radius: 5px;
+}
+
+blockquote {
+  padding: 10px 10px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  background-color: #97866a;
+  border: 2px solid #735557;
+  text-align: center;
+  color: white;
 }
