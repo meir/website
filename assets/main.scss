@@ -33,7 +33,12 @@ main {
 }
 
 a {
+  @extend .font-dela-gothic;
   color: $content-accent;
+}
+
+p a {
+  font-size: 0.85em;
 }
 
 article,
