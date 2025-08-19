@@ -40,7 +40,7 @@ h6 {
   font-family: "Dela Gothic One";
   src: url(/assets/fonts/DelaGothicOne-Regular.ttf);
 }
-.font-dela-gothic, .back {
+.font-dela-gothic, a, .back {
   font-family: "Dela Gothic One", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -179,7 +179,7 @@ h6 {
   font-family: "Dela Gothic One";
   src: url(/assets/fonts/DelaGothicOne-Regular.ttf);
 }
-.font-dela-gothic, .back {
+.font-dela-gothic, a, .back {
   font-family: "Dela Gothic One", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -200,7 +200,7 @@ body {
   font-family: "Dina Remaster II";
   src: url(/assets/fonts/DinaRemasterII.ttf);
 }
-.font-dina-remaster-ii, code {
+.font-dina-remaster-ii {
   font-family: "Dina Remaster II", monospace;
   font-weight: 400;
   font-style: normal;
@@ -293,6 +293,10 @@ main {
 
 a {
   color: #f7374f;
+}
+
+p a {
+  font-size: 0.85em;
 }
 
 article,
