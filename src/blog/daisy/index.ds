@@ -99,23 +99,25 @@ return layout([
         element css_selectors = : a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors" target="_blank" > "CSS Selectors."
       })}
       pre > code > ''
+        func nav_item = (str id, str url, str text) {
+          return : li > a id=(id) .link href=(url) > @{text}
+        }
+
         element x = : html {
           head > title > "Document title"
-          body {
-            main {
-              nav > ul {
-                li > h1#website-name > "Super Duper Cool Website"
-                li > a#home.link href="/" > "Home"
-                li > a#blog.link href="/blog" > "Blog"
-                li > a#about.link href="/about" > "About"
-              }
+          body > main {
+            nav > ul {
+              li > h1#website-name > "Super Duper Cool Website"
+              @{nav_item("home", "/", "Home")}
+              @{nav_item("blog", "/blog", "Blog")}
+              @{nav_item("about", "/about", "About")}
+            }
 
-              section#content {
-                h2#content-title > "Super Duper Cool Title"
-                p > \''
-                  Welcome to my super duper cool website! B)
-                \''
-              }
+            section#content {
+              h2#content-title > "Super Duper Cool Title"
+              p > \''
+                Welcome to my super duper cool website! B)
+              \''
             }
           }
         }
