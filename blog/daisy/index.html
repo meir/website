@@ -1,8 +1,8 @@
-<!DOCTYPE html><html lang="en"><head><title>Daisy, the transpiler.</title><link href="/main-1222137076086067060.css" rel="stylesheet"></link><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1.0"></meta><meta name="description" content="A blog about web development, programming, and more."></meta><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.css" rel="stylesheet" async=""></link><script async="" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" id="hljs_script"></script></head><body><nav><ul><li id="home" class=""><a href="/">home</a></li><li class="" id="blog"><a href="/blog">blog</a></li><li id="about" class=""><a href="/about">about</a></li></ul><span class="blocker"></span></nav><main><article><a href="../" class="back"><span>back</span></a><h1>Daisy, the transpiler.</h1><section><p>This project has had many iterations and by no means is it perfect.
+<!DOCTYPE html><html lang="en"><head><title>Daisy, the transpiler.</title><link rel="stylesheet" href="/main-1222137076086067060.css"></link><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1.0"></meta><meta content="A blog about web development, programming, and more." name="description"></meta><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.css" rel="stylesheet" async=""></link><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" id="hljs_script" async=""></script></head><body><nav><ul><li class="" id="home"><a href="/">home</a></li><li class="" id="blog"><a href="/blog">blog</a></li><li id="about" class=""><a href="/about">about</a></li></ul><span class="blocker"></span></nav><main><article><a class="back" href="../"><span>back</span></a><h1>Daisy, the transpiler.</h1><section><p>This project has had many iterations and by no means is it perfect.
 The idea came because of my frustration with constantly having to update dependencies, get the pipeline updated, and fix everything thats outdated.
 I'ts a never ending cycle in javascript frameworks and I never really wanted another project I have to maintain just to write this.
 
-So now I made another project I have to maintain just to write this, but no more dependency hell I guess?</p><a target="_blank" href="https://github.com/meir/daisy">Daisy on GitHub</a><h2>What is this?</h2><p>The answer is simple, this is a transpiler that turns a custom made-up language into static HTML so that I can just put it on GitHub pages and never look at it again.
+So now I made another project I have to maintain just to write this, but no more dependency hell I guess?</p><a href="https://github.com/meir/daisy" target="_blank">Daisy on GitHub</a><h2>What is this?</h2><p>The answer is simple, this is a transpiler that turns a custom made-up language into static HTML so that I can just put it on GitHub pages and never look at it again.
 
 Should you use this? Not really? 
 I made this to be what I want it to be, but it's nowhere anything I dream of it being.
@@ -28,7 +28,7 @@ list h = [ "value", 1 ]</code></pre><p>as you can see aswell, functions arent sp
 The same applies to lists and maps, I want to keep the language statically typed but maps and lists are straightup variable scopes, meaning theyre dynamic with their content, but the definitions in them are not.
 This means if you have a map such as <code>map x = { str field = "value" }</code> then <code>field</code> will always be a string.</p><h3>Elements.</h3><p>One big requirement of this project to me was how to define elements.
 I really dislike how HTML is basically just XML, I wanted to change this.
-We already have a much better option for this (sort of) in my opinion, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors" target="_blank">CSS Selectors.</a>
+We already have a much better option for this (sort of) in my opinion, <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors">CSS Selectors.</a>
 
 If we already have a solution to query elements using shorthands, then why can't we create them using those same shorthands?
 
@@ -36,23 +36,25 @@ That's why I decided to create elements simply by stating the tag straightoff, i
 For other attributes, just define them right after as if it's inside the HTML already.
 Due to limitations with the parser, since LALRPOP does not support look ahead, starting a block of elements has to start using a colon.
 
-What does this look like?<pre><code>element x = : html {
-  head > title > "Document title"
-  body {
-    main {
-      nav > ul {
-        li > h1#website-name > "Super Duper Cool Website"
-        li > a#home.link href="/" > "Home"
-        li > a#blog.link href="/blog" > "Blog"
-        li > a#about.link href="/about" > "About"
-      }
+What does this look like?<pre><code>func nav_item = (str id, str url, str text) {
+  return : li > a id=(id) .link href=(url) > @{text}
+}
 
-      section#content {
-        h2#content-title > "Super Duper Cool Title"
-        p > ''
-          Welcome to my super duper cool website! B)
-        ''
-      }
+element x = : html {
+  head > title > "Document title"
+  body > main {
+    nav > ul {
+      li > h1#website-name > "Super Duper Cool Website"
+      @{nav_item("home", "/", "Home")}
+      @{nav_item("blog", "/blog", "Blog")}
+      @{nav_item("about", "/about", "About")}
+    }
+
+    section#content {
+      h2#content-title > "Super Duper Cool Title"
+      p > ''
+        Welcome to my super duper cool website! B)
+      ''
     }
   }
 }</code></pre><p>After parsing and building this, this will result into the following:</p><pre><code class="language-html">&lt;html&gt;
@@ -89,7 +91,7 @@ What does this look like?<pre><code>element x = : html {
   &lt;/body&gt;
 &lt;/html&gt;</code></pre><p>There's much more going on in the background and some extra features such as importing files using methods.
 
-But for now enough showcasing and explaining, for more examples you can look in the source code of <a target="_blank" href="https://github.com/meir/website">this website</a> or in the examples folder of <a href="https://github.com/meir/daisy" target="_blank">the Daisy transpiler.</a>.</p></p></section><script data-loading="lazy" async="" data-lang="en" data-repo="meir/website" data-repo-id="R_kgDOIyQOzA" crossorigin="anonymous" data-category-id="DIC_kwDOIyQOzM4CkKe5" data-emit-metadata="0" data-theme="https://yesimhuman.dev//giscus-14629352936808272518.css" data-input-position="bottom" data-reactions-enabled="1" data-strict="0" data-mapping="pathname" src="https://giscus.app/client.js"></script></article><footer><div id="footer-images"><img alt="nonazi" loading="lazy" id="nonazi" src="/assets/images/nonazi.png"></img><img alt="lgbtq" loading="lazy" src="/assets/images/flag_pride.png" id="lgbtq"></img><img id="trans" src="/assets/images/flag_transgender.png" alt="trans" loading="lazy"></img></div><span>Last generated: 19/08/2025 @ 08:54</span><a id="license" href="/LICENSE/index.html">MIT @ 2025</a></footer></main><script async="">(function load_hljs() {
+But for now enough showcasing and explaining, for more examples you can look in the source code of <a target="_blank" href="https://github.com/meir/website">this website</a> or in the examples folder of <a target="_blank" href="https://github.com/meir/daisy">the Daisy transpiler.</a>.</p></p></section><script data-input-position="bottom" data-mapping="pathname" data-emit-metadata="0" src="https://giscus.app/client.js" data-strict="0" data-theme="https://yesimhuman.dev//giscus-14629352936808272518.css" data-loading="lazy" crossorigin="anonymous" async="" data-lang="en" data-repo-id="R_kgDOIyQOzA" data-repo="meir/website" data-category-id="DIC_kwDOIyQOzM4CkKe5" data-reactions-enabled="1"></script></article><footer><div id="footer-images"><img loading="lazy" id="nonazi" src="/assets/images/nonazi.png" alt="nonazi"></img><img loading="lazy" id="lgbtq" alt="lgbtq" src="/assets/images/flag_pride.png"></img><img alt="trans" src="/assets/images/flag_transgender.png" loading="lazy" id="trans"></img></div><span>Last generated: 19/08/2025 @ 09:16</span><a id="license" href="/LICENSE/index.html">MIT @ 2025</a></footer></main><script async="">(function load_hljs() {
   if (window.hljs) {
     hljs.configure({ cssSelector: 'code' });
     hljs.highlightAll();
